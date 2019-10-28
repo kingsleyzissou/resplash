@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+
+// Update Bulma's global variables
+$family-sans-serif: 'Nunito', sans-serif;
+
+
+// Import only what you need from Bulma
+@import '../node_modules/bulma/sass/utilities/_all.sass';
+@import '../node_modules/bulma/sass/base/_all.sass';
+@import '../node_modules/bulma/sass/elements/button.sass';
+@import '../node_modules/bulma/sass/elements/container.sass';
+@import '../node_modules/bulma/sass/elements/form.sass';
+@import '../node_modules/bulma/sass/elements/title.sass';
+@import '../node_modules/bulma/sass/components/navbar.sass';
+@import '../node_modules/bulma/sass/layout/hero.sass';
+@import '../node_modules/bulma/sass/layout/section.sass';
+
+.has-bg-img { 
+  background: 
+    linear-gradient(141deg, rgba(0,158,108, 0.75) 0%, rgba(0,209,178,0.75) 71%, rgba(0,231,235,0.75) 100%),
+    url('/images/placeholder.jpg') center center; 
+  background-size: cover; 
+***REMOVED***
+
+.tile-card.card:hover {
+  background: rgba(0,0,0,0.2);
+***REMOVED***
+
+.tile-card .card-image i {
+  color: #3273dc;
+***REMOVED***
+
+.tile-card .card:hover .tile-card .card-image i {
+  color: #363636;
+***REMOVED***
+
+#content {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+***REMOVED***
+  
+main {
+  flex: 1;
+***REMOVED***
+
+.hero-foot {
+  padding: 1em;
+***REMOVED***
