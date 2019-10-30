@@ -1,66 +1,54 @@
-import React, { Fragment ***REMOVED*** from 'react'
+import React, { Fragment, useState ***REMOVED*** from 'react'
+import { Link ***REMOVED*** from 'react-router-dom'
+import {
+  Container, HeroHeader, Image, Navbar, NavbarMenu, NavbarItem,
+  NavbarBurger, NavbarBrand, NavbarEnd, NavbarDropdown,
+  NavbarDivider
+***REMOVED*** from 'bloomer'
 
 export default () => {
+  const [isActive, setIsActive] = useState(false)
+
   return (
-    // <section className="hero is-info">
     <Fragment>
-      <div className="hero-head">
-        <nav className="navbar main-navbar">
-          <div className="container" >
-            <div className="navbar-brand">
-              <a href="/" className="navbar-item">
-                <figure className="image is-24x24">
-                  {/* Source a placeholder */***REMOVED***
-                  {/* <img src="/images/logo.png" alt="Placeholder" /> */***REMOVED***
-                </figure>
+      <HeroHeader>
+        <Navbar className="main-navbar">
+          <Container>
+            <NavbarBrand>
+              <Link to="/" className="navbar-item">
+                <Image isSize="24x24" src="/logo.png" />
                 &nbsp;&nbsp;
                 Resplash
-               </a>
-              <span className="navbar-burger burger">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </div>
-            <div className="navbar-menu">
-              <div className="navbar-end">
-                <a href="/dashboard" className="navbar-item">
-                  Dashboard
-                </a>
-                <a href="/about" className="navbar-item">
-                  About
-                </a>
-                <a href="/login" className="navbar-item">
-                  Login
-                </a>
-                <a href="/signup" className="navbar-item">
-                  Signup
-                </a>
-                <div className="navbar-item has-dropdown">
-                  <a href="#" className="navbar-link">
-                    <figure className="image is-24x24">
-                      <img src="https://bulma.io/images/placeholders/32x32.png" style={{ borderRadius: 999 + 'px' ***REMOVED******REMOVED*** alt="Placeholder" />
-                    </figure>
+               </Link>
+              <NavbarBurger isActive={isActive***REMOVED*** onClick={() => setIsActive(!isActive)***REMOVED*** />
+            </NavbarBrand>
+            <NavbarMenu isActive={isActive***REMOVED***>
+              <NavbarEnd>
+                <Link to="/" className="navbar-item">Dashboard</Link>
+                <Link to="/login" className="navbar-item">Login</Link>
+                <Link to="/register" className="navbar-item">Register</Link>
+                <NavbarItem hasDropdown isHoverable>
+                  <NavbarItem href="#" className="navbar-link">
+                    <Image
+                      isSize="24x24"
+                      style={{ borderRadius: 999 + 'px' ***REMOVED******REMOVED***
+                      src="https://bulma.io/images/placeholders/32x32.png"
+                    />
                     <span>&nbsp;&nbsp;@</span>
-                  </a>
-                  <div className="navbar-dropdown is-right">
-                    <hr className="navbar-divider" />
-                    <a className="navbar-item" href="/logout">
-                      Logout
-                  </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </nav>
-      </div>
-      {/* <nav className="navbar has-shadow has-text-white" style={{ background: '#3AB6FF' ***REMOVED******REMOVED***>
-        <div className="container">
-
-        </div>
-      </nav> */***REMOVED***
+                  </NavbarItem>
+                  <NavbarDropdown>
+                    <Link to="/profile" className="navbar-item" >
+                      View Profile
+                    </Link>
+                    <NavbarDivider />
+                    <Link to='/logout' className="navbar-item">Logout</Link>
+                  </NavbarDropdown>
+                </NavbarItem>
+              </NavbarEnd>
+            </NavbarMenu>
+          </Container>
+        </Navbar>
+      </HeroHeader>
     </Fragment>
-    // </section >
   )
 ***REMOVED***
