@@ -97,7 +97,7 @@ export default () => {
                     ref={register({
                       required: true,
                       validate: (value) => {
-                        return value === watch('password'); // value is from password2 and watch will return value from password1
+                        return value === watch('password');
                       ***REMOVED***
                     ***REMOVED***)***REMOVED***
                   />

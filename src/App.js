@@ -1,13 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route ***REMOVED*** from 'react-router-dom'
-import { Hero, HeroBody ***REMOVED*** from 'bloomer'
+import { Hero ***REMOVED*** from 'bloomer'
 import './App.scss'
-// import Dashboard from './pages/Dashboard'
+import routes from './routes'
 import Navbar from './components/Navbar'
-import Album from './pages/Album'
-import Gallery from './pages/Gallery'
-import Login from './pages/Login'
-import Register from './pages/Register'
+import * as firebase from 'firebase'
+import firebaseConfig from './config/firebase'
+
+firebase.initializeApp(firebaseConfig)
+
+export const AuhtContext = React.createContext(null)
 
 function App() {
   return (
@@ -16,21 +18,18 @@ function App() {
         <Hero isColor="info" isFullHeight style={{ overflow: 'scroll' ***REMOVED******REMOVED***>
           <Navbar />
           <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
-            <Route path="/album">
-              <Album />
-            </Route>
-            <Route path="/gallery">
-              <Gallery />
-            </Route>
-            <Route path="/">
-              <HeroBody>Hello</HeroBody>
-            </Route>
+            {
+              routes.map((r, index) => {
+                return (
+                  <Route
+                    key={index***REMOVED***
+                    path={r.path***REMOVED***
+                    exact={r.exact***REMOVED***
+                    component={r.main***REMOVED***
+                  />
+                )
+              ***REMOVED***)
+            ***REMOVED***
           </Switch>
         </Hero>
       </Router>
