@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Fragment ***REMOVED*** from 'react'
 
 export default () => {
   return (
-    <section className="hero is-info">
+    // <section className="hero is-info">
+    <Fragment>
       <div className="hero-head">
         <nav className="navbar main-navbar">
           <div className="container" >
@@ -54,11 +55,12 @@ export default () => {
           </div>
         </nav>
       </div>
-      <nav className="navbar has-shadow has-text-white" style={{ background: '#3AB6FF' ***REMOVED******REMOVED***>
+      {/* <nav className="navbar has-shadow has-text-white" style={{ background: '#3AB6FF' ***REMOVED******REMOVED***>
         <div className="container">
 
         </div>
-      </nav>
-    </section >
+      </nav> */***REMOVED***
+    </Fragment>
+    // </section >
   )
 ***REMOVED***

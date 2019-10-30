@@ -3,13 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.7",
     "@storybook/addon-knobs": "^5.2.5",
     "bloomer": "^0.6.5",
     "bulma": "^0.8.0",
+    "classnames": "^2.2.6",
     "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-mason": "^1.1.2",
+    "react-hook-form": "^3.26.3",
     "react-scripts": "3.2.0"
   ***REMOVED***,
   "scripts": {
@@ -42,7 +46,6 @@
     "@storybook/addon-links": "^5.2.5",
     "@storybook/addons": "^5.2.5",
     "@storybook/react": "^5.2.5",
-    "babel-loader": "^8.0.6",
-    "fslightbox-react": "^1.4.3"
+    "babel-loader": "^8.0.6"
   ***REMOVED***
 ***REMOVED***

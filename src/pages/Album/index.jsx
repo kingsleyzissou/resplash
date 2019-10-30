@@ -1,8 +1,9 @@
 import React, { useState, Fragment ***REMOVED*** from 'react'
-import { Modal ***REMOVED*** from 'bloomer'
+import { Column ***REMOVED*** from 'bloomer'
 // import Masonry from 'react-mason'
 import Image from '../../components/Image'
 import Lightbox from '../../components/Lightbox';
+import { Columns ***REMOVED*** from 'bloomer/lib/grid/Columns';
 
 export default () => {
 
@@ -88,19 +89,21 @@ export default () => {
 
   const grid = images.map((image, index) => {
     return (
-      <Image
-        handleClick={handleClick***REMOVED***
-        src={image.image***REMOVED***
-        alt={image.alt***REMOVED***
-        key={index***REMOVED***
-        index={index***REMOVED***
-        description={image.description***REMOVED***
-      />
+      <Column isSize={{ mobile: 8, default: 4 ***REMOVED******REMOVED*** isMarginless>
+        <Image
+          handleClick={handleClick***REMOVED***
+          src={image.image***REMOVED***
+          alt={image.alt***REMOVED***
+          key={index***REMOVED***
+          index={index***REMOVED***
+          description={image.description***REMOVED***
+        />
+      </Column>
     )
   ***REMOVED***);
 
-
-  const srcs = images.map((image) => image.image);
+  // Required for the lightbox component
+  // const srcs = images.map((image) => image.image);
 
   return (
     <Fragment>
@@ -110,7 +113,9 @@ export default () => {
         description={lightbox.description***REMOVED***
         handleClose={handleClose***REMOVED***
       />
-      {grid***REMOVED***
+      <Columns isMultiline>
+        {grid***REMOVED***
+      </Columns>
     </Fragment>
   )
 

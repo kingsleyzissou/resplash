@@ -1,18 +1,18 @@
 import React from 'react';
-import { Container ***REMOVED*** from 'bloomer'
+// import { Container ***REMOVED*** from 'bloomer'
 import './App.scss'
-import Navbar from './components/Navbar'
+// import Navbar from './components/Navbar'
 // import Gallery from './pages/Gallery'
-import Album from './pages/Album'
+import Login from './pages/Register'
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      <Container>
-        {/* <Gallery /> */***REMOVED***
-        <Album />
-      </Container>
+      {/* <Navbar /> */***REMOVED***
+      {/* <Container> */***REMOVED***
+      {/* <Gallery /> */***REMOVED***
+      <Login />
+      {/* </Container> */***REMOVED***
     </div>
   );
 ***REMOVED***

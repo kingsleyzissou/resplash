@@ -6,7 +6,10 @@ export default (props) => {
     props.handleClick(props)
   ***REMOVED***
   return (
-    <figure onClick={handleClick***REMOVED***>
+    <figure
+      onClick={handleClick***REMOVED***
+      className="image"
+    >
       <img src={props.src***REMOVED*** alt={props.alt***REMOVED*** />
     </figure>
   )
