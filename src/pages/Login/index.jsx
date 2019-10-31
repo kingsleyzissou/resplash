@@ -12,9 +12,9 @@ import {
 import { withRouter ***REMOVED*** from 'react-router-dom'
 
 const Login = ({ history ***REMOVED***) => {
-  const { register, handleSubmit, errors ***REMOVED*** = useForm()
   const Auth = useContext(AuthContext);
 
+  const { register, handleSubmit, errors ***REMOVED*** = useForm()
   const [errs, setErrs] = useState('')
 
   const onSubmit = data => {
@@ -29,7 +29,7 @@ const Login = ({ history ***REMOVED***) => {
           .then((res) => {
             console.log(res, Auth)
             history.push('/dashboard')
-            if (res.user) Auth.setLoggedIn(true)
+            if (res.user) Auth.setUser({ authenticated: true, user: res.user ***REMOVED***)
           ***REMOVED***)
           .catch(({ message ***REMOVED***) => {
             setErrs(message)
@@ -47,8 +47,8 @@ const Login = ({ history ***REMOVED***) => {
           .auth()
           .signInWithPopup(provider)
           .then((res) => {
-            console.log(res, Auth)
-            if (res.user) Auth.setLoggedIn(true)
+            history.push('/dashboard')
+            if (res.user) Auth.setUser({ authenticated: true, user: res.user ***REMOVED***)
           ***REMOVED***)
           .catch(({ message ***REMOVED***) => {
             setErrs(message)

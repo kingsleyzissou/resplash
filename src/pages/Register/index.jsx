@@ -11,9 +11,10 @@ import {
 ***REMOVED*** from 'bloomer'
 import { withRouter ***REMOVED*** from 'react-router-dom';
 
-const Register = () => {
-  const { register, handleSubmit, watch, errors ***REMOVED*** = useForm()
+const Register = ({ history ***REMOVED***) => {
   const Auth = useContext(AuthContext);
+
+  const { register, handleSubmit, watch, errors ***REMOVED*** = useForm()
   const [errs, setErrs] = useState('')
 
   const onSubmit = data => {
@@ -26,8 +27,8 @@ const Register = () => {
           .auth()
           .createUserWithEmailAndPassword(email, password)
           .then((res) => {
-            console.log(res, Auth)
-            if (res.user) Auth.setLoggedIn(true)
+            history.push('/dashboard')
+            if (res.user) Auth.setUser({ authenticated: true, user: res.user ***REMOVED***)
           ***REMOVED***)
           .catch(({ message ***REMOVED***) => {
             setErrs(message)
@@ -45,8 +46,8 @@ const Register = () => {
           .auth()
           .signInWithPopup(provider)
           .then((res) => {
-            console.log(res, Auth)
-            if (res.user) Auth.setLoggedIn(true)
+            history.push('/dashboard')
+            if (res.user) Auth.setUser({ authenticated: true, user: res.user ***REMOVED***)
           ***REMOVED***)
           .catch(({ message ***REMOVED***) => {
             setErrs(message)

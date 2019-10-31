@@ -1,5 +1,6 @@
-import React, { Fragment, useState ***REMOVED*** from 'react'
+import React, { Fragment, useContext, useState ***REMOVED*** from 'react'
 import { Link ***REMOVED*** from 'react-router-dom'
+import { AuthContext ***REMOVED*** from '../../App'
 import {
   Container, HeroHeader, Image, Navbar, NavbarMenu, NavbarItem,
   NavbarBurger, NavbarBrand, NavbarEnd, NavbarDropdown,
@@ -8,6 +9,13 @@ import {
 
 export default () => {
   const [isActive, setIsActive] = useState(false)
+
+  const Auth = useContext(AuthContext);
+  let { authenticated, user ***REMOVED*** = Auth.user;
+
+  if (user) {
+    user = JSON.parse(user);
+  ***REMOVED***
 
   return (
     <Fragment>
@@ -25,25 +33,34 @@ export default () => {
             <NavbarMenu isActive={isActive***REMOVED***>
               <NavbarEnd>
                 <Link to="/" className="navbar-item">Dashboard</Link>
-                <Link to="/login" className="navbar-item">Login</Link>
-                <Link to="/register" className="navbar-item">Register</Link>
-                <NavbarItem hasDropdown isHoverable>
-                  <NavbarItem href="#" className="navbar-link">
-                    <Image
-                      isSize="24x24"
-                      style={{ borderRadius: 999 + 'px' ***REMOVED******REMOVED***
-                      src="https://bulma.io/images/placeholders/32x32.png"
-                    />
-                    <span>&nbsp;&nbsp;@</span>
+                {
+                  !authenticated && (
+                    <Fragment>
+                      <Link to="/login" className="navbar-item">Login</Link>
+                      <Link to="/register" className="navbar-item">Register</Link>
+                    </Fragment>
+                  )
+                ***REMOVED***
+                {
+                  authenticated &&
+                  <NavbarItem hasDropdown isHoverable>
+                    <NavbarItem href="#" className="navbar-link">
+                      <span>{user.displayName***REMOVED***&nbsp;&nbsp;</span>
+                      <Image
+                        isSize="24x24"
+                        style={{ borderRadius: 999 + 'px' ***REMOVED******REMOVED***
+                        src={user.photoURL***REMOVED***
+                      />
+                    </NavbarItem>
+                    <NavbarDropdown>
+                      <Link to="/profile" className="navbar-item" >
+                        View Profile
+                      </Link>
+                      <NavbarDivider />
+                      <Link to='/logout' className="navbar-item">Logout</Link>
+                    </NavbarDropdown>
                   </NavbarItem>
-                  <NavbarDropdown>
-                    <Link to="/profile" className="navbar-item" >
-                      View Profile
-                    </Link>
-                    <NavbarDivider />
-                    <Link to='/logout' className="navbar-item">Logout</Link>
-                  </NavbarDropdown>
-                </NavbarItem>
+                ***REMOVED***
               </NavbarEnd>
             </NavbarMenu>
           </Container>
