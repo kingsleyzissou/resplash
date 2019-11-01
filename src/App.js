@@ -1,36 +1,33 @@
-import React, { useState, useEffect ***REMOVED*** from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route ***REMOVED*** from 'react-router-dom'
 import { Hero ***REMOVED*** from 'bloomer'
 import './App.scss'
 import routes from './routes'
 import Navbar from './components/Navbar'
-import * as firebase from 'firebase'
-import firebaseConfig from './config/firebase'
-import authenticated from './middleware/authenticated'
+import AuthService, { AuthContext ***REMOVED*** from './services/auth'
 
-firebase.initializeApp(firebaseConfig)
 
-export const AuthContext = React.createContext(null)
+// import authenticated from './middleware/authenticated'
 
-const initState = {
-  value: {
-    isLoggedIn: false,
-    user: {***REMOVED***
-  ***REMOVED***
-***REMOVED***
+// const initState = {
+//   value: {
+//     isLoggedIn: false,
+//     user: {***REMOVED***
+//   ***REMOVED***
+// ***REMOVED***
 
 function App() {
-  const [user, setUser] = useState(initState)
+  // const [user, setUser] = useState(initState)
 
-  useEffect(() => {
-    authenticated({
-      setUser,
-      apiKey: firebaseConfig.apiKey
-    ***REMOVED***)
-  ***REMOVED***, [])
+  // useEffect(() => {
+  //   authenticated({
+  //     setUser,
+  //     apiKey: firebaseConfig.apiKey
+  //   ***REMOVED***)
+  // ***REMOVED***, [])
 
   return (
-    <AuthContext.Provider value={{ user, setUser ***REMOVED******REMOVED***>
+    <AuthContext.Provider value={new AuthService()***REMOVED***>
       <div className="App">
         <Router>
           <Hero isColor="info" isFullHeight style={{ overflow: 'scroll' ***REMOVED******REMOVED***>

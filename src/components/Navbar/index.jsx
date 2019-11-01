@@ -1,26 +1,29 @@
 import React, { Fragment, useContext, useState ***REMOVED*** from 'react'
 import { Link ***REMOVED*** from 'react-router-dom'
-import { AuthContext ***REMOVED*** from '../../App'
+import { AuthContext ***REMOVED*** from '../../services/auth'
 import {
-  Container, HeroHeader, Image, Navbar, NavbarMenu, NavbarItem,
+  Container, HeroHeader, Image, Navbar as Nav, NavbarMenu, NavbarItem,
   NavbarBurger, NavbarBrand, NavbarEnd, NavbarDropdown,
   NavbarDivider
 ***REMOVED*** from 'bloomer'
+import { withRouter ***REMOVED*** from 'react-router-dom'
 
-export default () => {
+const Navbar = ({ history ***REMOVED***) => {
   const [isActive, setIsActive] = useState(false)
 
-  const Auth = useContext(AuthContext);
-  let { authenticated, user ***REMOVED*** = Auth.user;
+  const auth = useContext(AuthContext);
+  const authenticated = auth.authenticated()
+  const user = auth.getCurrentUser()
 
-  if (user) {
-    user = JSON.parse(user);
+  const logout = () => {
+    auth.logout()
+    history.push('/login')
   ***REMOVED***
 
   return (
     <Fragment>
       <HeroHeader>
-        <Navbar className="main-navbar">
+        <Nav className="main-navbar">
           <Container>
             <NavbarBrand>
               <Link to="/" className="navbar-item">
@@ -45,27 +48,31 @@ export default () => {
                   authenticated &&
                   <NavbarItem hasDropdown isHoverable>
                     <NavbarItem href="#" className="navbar-link">
-                      <span>{user.displayName***REMOVED***&nbsp;&nbsp;</span>
-                      <Image
-                        isSize="24x24"
-                        style={{ borderRadius: 999 + 'px' ***REMOVED******REMOVED***
-                        src={user.photoURL***REMOVED***
-                      />
+                      <span>{user.displayName || user.email***REMOVED***&nbsp;&nbsp;</span>
+                      <figure className="image is-24x24">
+                        <img className="is-rounded" src={user.photoURL || '/user.jpg'***REMOVED*** alt="User icon" />
+                      </figure>
                     </NavbarItem>
                     <NavbarDropdown>
                       <Link to="/profile" className="navbar-item" >
                         View Profile
                       </Link>
                       <NavbarDivider />
-                      <Link to='/logout' className="navbar-item">Logout</Link>
+                      <NavbarItem href="#"
+                        onClick={logout***REMOVED***
+                      >
+                        Logout
+                      </NavbarItem>
                     </NavbarDropdown>
                   </NavbarItem>
                 ***REMOVED***
               </NavbarEnd>
             </NavbarMenu>
           </Container>
-        </Navbar>
+        </Nav>
       </HeroHeader>
     </Fragment>
   )
 ***REMOVED***
+
+export default withRouter(Navbar)
