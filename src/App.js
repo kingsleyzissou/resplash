@@ -1,55 +1,47 @@
-import React from 'react';
+import React, { useState ***REMOVED*** from 'react';
 import { BrowserRouter as Router, Switch, Route ***REMOVED*** from 'react-router-dom'
-import { Hero ***REMOVED*** from 'bloomer'
 import './App.scss'
 import routes from './routes'
-import Navbar from './components/Navbar'
+import Api, { ApiContext ***REMOVED*** from './services/api'
 import AuthService, { AuthContext ***REMOVED*** from './services/auth'
+import UserModel from './services/user'
+import CollectionModel from './services/collection'
+import Navbar from './components/Navbar'
+import { AppLayout, DashboardLayout ***REMOVED*** from './layout'
 
-
-// import authenticated from './middleware/authenticated'
-
-// const initState = {
-//   value: {
-//     isLoggedIn: false,
-//     user: {***REMOVED***
-//   ***REMOVED***
-// ***REMOVED***
+const LayoutContext = React.createContext(null)
+export { LayoutContext ***REMOVED***
 
 function App() {
-  // const [user, setUser] = useState(initState)
-
-  // useEffect(() => {
-  //   authenticated({
-  //     setUser,
-  //     apiKey: firebaseConfig.apiKey
-  //   ***REMOVED***)
-  // ***REMOVED***, [])
-
+  const [fullLayout, setFullLayout] = useState(true)
+  const ApiLayer = new Api(new UserModel(), new CollectionModel())
   return (
-    <AuthContext.Provider value={new AuthService()***REMOVED***>
-      <div className="App">
-        <Router>
-          <Hero isColor="info" isFullHeight style={{ overflow: 'scroll' ***REMOVED******REMOVED***>
-            <Navbar />
-            <Switch>
-              {
-                routes.map((r, index) => {
-                  return (
-                    <Route
+    <ApiContext.Provider value={ApiLayer***REMOVED***>
+      <AuthContext.Provider value={new AuthService(ApiLayer.getUserModel())***REMOVED***>
+        <LayoutContext.Provider value={{ fullLayout, setFullLayout ***REMOVED******REMOVED***>
+          <div className="App">
+            <Router>
+              <Switch>
+                {
+                  routes.map((route, index) => {
+                    let Component = route.main
+                    let Layout = (!route.dashboard) ?
+                      (<AppLayout Component={Component***REMOVED*** Navbar={Navbar***REMOVED*** />) :
+                      (<DashboardLayout Component={Component***REMOVED*** Navbar={Navbar***REMOVED*** />)
+                    return <Route
                       key={index***REMOVED***
-                      path={r.path***REMOVED***
-                      exact={r.exact***REMOVED***
-                      component={r.main***REMOVED***
+                      path={route.path***REMOVED***
+                      exact={route.exact***REMOVED***
+                      component={() => Layout***REMOVED***
                     />
-                  )
-                ***REMOVED***)
-              ***REMOVED***
-            </Switch>
-          </Hero>
-        </Router>
-      </div>
-    </AuthContext.Provider>
+                  ***REMOVED***)
+                ***REMOVED***
+              </Switch>
+            </Router>
+          </div>
+        </LayoutContext.Provider>
+      </AuthContext.Provider>
+    </ApiContext.Provider>
   );
 ***REMOVED***
 

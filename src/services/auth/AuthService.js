@@ -1,11 +1,10 @@
-import * as firebase from 'firebase'
-import config from '../../config/firebase'
+import firebase, { config ***REMOVED*** from '../../firebase'
 import { readSession, clearSession ***REMOVED*** from '../../helpers/session'
 
 export default class AuthService {
 
-  constructor() {
-    firebase.initializeApp(config)
+  constructor(User) {
+    this.User = User
     this.auth = firebase.auth()
     this.auth.setPersistence(
       firebase.auth.Auth.Persistence.SESSION
@@ -14,11 +13,12 @@ export default class AuthService {
   ***REMOVED***
 
   login = async (email, password) => {
-    return await this.auth
+    let { user ***REMOVED*** = await this.auth
       .signInWithEmailAndPassword(email, password)
       .catch((error) => {
         throw new Error(error)
       ***REMOVED***)
+    return user
   ***REMOVED***
 
   logout = async () => {
@@ -27,19 +27,23 @@ export default class AuthService {
   ***REMOVED***
 
   googleLogin = async () => {
-    return await this.auth
+    let { user ***REMOVED*** = await this.auth
       .signInWithPopup(this.provider)
       .catch((error) => {
         throw new Error(error)
       ***REMOVED***)
+    this.User.create(user)
+    return user
   ***REMOVED***
 
   register = async (email, password) => {
-    return await this.auth
+    let { user ***REMOVED*** = await this.auth
       .createUserWithEmailAndPassword(email, password)
       .catch((error) => {
         throw new Error(error)
       ***REMOVED***)
+    this.User.create(user)
+    return user
   ***REMOVED***
 
   authenticated = () => {
