@@ -1,27 +1,19 @@
 import classNames from 'classnames'
 
-const emailInputClasses = (errors) => {
+const inputClasses = (field, errors) => {
   return classNames({
     'input': true,
     'is-large': true,
-    'is-danger': errors.email,
+    'is-danger': errors[field],
   ***REMOVED***);
 ***REMOVED***
 
-const passwordInputClasses = (errors) => {
+const textareaClasses = (field, errors) => {
   return classNames({
-    'input': true,
+    'textarea': true,
     'is-large': true,
-    'is-danger': errors.password,
+    'is-danger': errors[field],
   ***REMOVED***);
 ***REMOVED***
 
-const confirmPasswordInputClasses = (errors) => {
-  return classNames({
-    'input': true,
-    'is-large': true,
-    'is-danger': errors.confirm,
-  ***REMOVED***);
-***REMOVED***
-
-export { emailInputClasses, passwordInputClasses, confirmPasswordInputClasses ***REMOVED***
+export { inputClasses, textareaClasses ***REMOVED***

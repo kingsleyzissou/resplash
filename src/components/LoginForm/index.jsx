@@ -1,13 +1,10 @@
 
-import React, { Fragment, useContext, useState ***REMOVED*** from 'react'
+import React, { Fragment, useState ***REMOVED*** from 'react'
 import useForm from 'react-hook-form'
-import { withRouter ***REMOVED*** from 'react-router-dom'
 import { Field, Control, Help, Notification, Delete, Button, Image ***REMOVED*** from 'bloomer'
-import { AuthContext ***REMOVED*** from '../../services/auth'
-import { emailInputClasses, passwordInputClasses ***REMOVED*** from '../../helpers/formClasses'
+import { inputClasses ***REMOVED*** from '../../helpers/formClasses'
 
-const LoginForm = ({ history ***REMOVED***) => {
-  const auth = useContext(AuthContext);
+const LoginForm = (props) => {
 
   const { register, handleSubmit, errors ***REMOVED*** = useForm()
   const [errs, setErrs] = useState({ message: '' ***REMOVED***)
@@ -18,14 +15,14 @@ const LoginForm = ({ history ***REMOVED***) => {
   ***REMOVED***
 
   const login = ({ email, password ***REMOVED***) => {
-    auth.login(email, password)
-      .then(() => history.push('/dashboard'))
+    props.auth.login(email, password)
+      .then(() => console.log(props))
       .catch(({ message ***REMOVED***) => setErrs({ message ***REMOVED***))
   ***REMOVED***
 
   const googleLogin = () => {
-    auth.googleLogin()
-      .then(() => history.push('/dashboard'))
+    props.auth.googleLogin()
+      .then(() => console.log(props))
       .catch(({ message ***REMOVED***) => setErrs({ message ***REMOVED***))
   ***REMOVED***
 
@@ -40,7 +37,7 @@ const LoginForm = ({ history ***REMOVED***) => {
       <Field>
         <Control>
           <input
-            className={emailInputClasses(errors)***REMOVED***
+            className={inputClasses('email', errors)***REMOVED***
             type="email"
             name="email"
             placeholder="Email"
@@ -61,7 +58,7 @@ const LoginForm = ({ history ***REMOVED***) => {
       <Field>
         <Control>
           <input
-            className={passwordInputClasses(errors)***REMOVED***
+            className={inputClasses('password', errors)***REMOVED***
             type="password"
             name="password"
             placeholder="Password"
@@ -88,4 +85,4 @@ const LoginForm = ({ history ***REMOVED***) => {
   )
 ***REMOVED***
 
-export default withRouter(LoginForm)
+export default LoginForm

@@ -2,9 +2,8 @@ import { db ***REMOVED*** from '../../firebase'
 
 class Collection {
 
-
   create = ({ uid, name, description ***REMOVED***) => {
-    db.collection('collections').set({
+    db.collection('collections').add({
       user: `users/${uid***REMOVED***`,
       name,
       description
