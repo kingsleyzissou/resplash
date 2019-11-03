@@ -1,7 +1,7 @@
 import React, { Fragment, useState ***REMOVED*** from 'react'
 import useForm from 'react-hook-form'
 import { Field, Control, Help, Notification, Delete, Button, Image ***REMOVED*** from 'bloomer'
-import { inputClasses ***REMOVED*** from '../../helpers/formClasses'
+import { inputClasses ***REMOVED*** from '../../utils/formClasses'
 
 const RegisterForm = (props) => {
   const { register, handleSubmit, watch, errors ***REMOVED*** = useForm()

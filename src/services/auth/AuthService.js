@@ -1,5 +1,5 @@
 import firebase, { config ***REMOVED*** from '../../firebase'
-import { readSession, clearSession ***REMOVED*** from '../../helpers/session'
+import { readSession, clearSession ***REMOVED*** from '../../utils/session'
 
 export default class AuthService {
 

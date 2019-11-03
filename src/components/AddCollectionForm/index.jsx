@@ -1,7 +1,7 @@
 import React, { Fragment ***REMOVED*** from 'react'
 import useForm from 'react-hook-form'
 import { Field, Control, Button, Help ***REMOVED*** from 'bloomer'
-import { inputClasses, textareaClasses ***REMOVED*** from '../../helpers/formClasses'
+import { inputClasses, textareaClasses ***REMOVED*** from '../../utils/formClasses'
 
 export default ({ addCollection, close ***REMOVED***) => {
   const { register, handleSubmit, errors, reset ***REMOVED*** = useForm()
