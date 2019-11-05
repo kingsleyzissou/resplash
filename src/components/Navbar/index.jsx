@@ -1,14 +1,14 @@
-import React, { Fragment, useContext, useState ***REMOVED*** from 'react'
-import { Link ***REMOVED*** from 'react-router-dom'
-import { AuthContext ***REMOVED*** from '../../services/auth'
+import React, { Fragment, useContext, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { AuthContext } from '../../services/auth'
 import {
   Container, HeroHeader, Image, Navbar as Nav, NavbarMenu, NavbarItem,
   NavbarBurger, NavbarBrand, NavbarEnd, NavbarDropdown,
   NavbarDivider
-***REMOVED*** from 'bloomer'
-import { withRouter ***REMOVED*** from 'react-router-dom'
+} from 'bloomer'
+import { withRouter } from 'react-router-dom'
 
-const Navbar = ({ history ***REMOVED***) => {
+const Navbar = ({ history }) => {
   const [isActive, setIsActive] = useState(false)
 
   const auth = useContext(AuthContext);
@@ -18,7 +18,7 @@ const Navbar = ({ history ***REMOVED***) => {
   const logout = () => {
     auth.logout()
     history.push('/login')
-  ***REMOVED***
+  }
 
   return (
     <Fragment>
@@ -31,9 +31,9 @@ const Navbar = ({ history ***REMOVED***) => {
                 &nbsp;&nbsp;
                 Resplash
                </Link>
-              <NavbarBurger isActive={isActive***REMOVED*** onClick={() => setIsActive(!isActive)***REMOVED*** />
+              <NavbarBurger isActive={isActive} onClick={() => setIsActive(!isActive)} />
             </NavbarBrand>
-            <NavbarMenu isActive={isActive***REMOVED***>
+            <NavbarMenu isActive={isActive}>
               <NavbarEnd>
                 <Link to="/" className="navbar-item">Dashboard</Link>
                 {
@@ -43,14 +43,14 @@ const Navbar = ({ history ***REMOVED***) => {
                       <Link to="/register" className="navbar-item">Register</Link>
                     </Fragment>
                   )
-                ***REMOVED***
+                }
                 {
                   authenticated &&
                   <NavbarItem hasDropdown isHoverable>
                     <NavbarItem href="#" className="navbar-link">
-                      <span>{user.displayName || user.email***REMOVED***&nbsp;&nbsp;</span>
+                      <span>{user.displayName || user.email}&nbsp;&nbsp;</span>
                       <figure className="image is-24x24">
-                        <img className="is-rounded" src={user.photoURL || '/user.jpg'***REMOVED*** alt="User icon" />
+                        <img className="is-rounded" src={user.photoURL || '/user.jpg'} alt="User icon" />
                       </figure>
                     </NavbarItem>
                     <NavbarDropdown>
@@ -59,13 +59,13 @@ const Navbar = ({ history ***REMOVED***) => {
                       </Link>
                       <NavbarDivider />
                       <NavbarItem href="#"
-                        onClick={logout***REMOVED***
+                        onClick={logout}
                       >
                         Logout
                       </NavbarItem>
                     </NavbarDropdown>
                   </NavbarItem>
-                ***REMOVED***
+                }
               </NavbarEnd>
             </NavbarMenu>
           </Container>
@@ -73,6 +73,6 @@ const Navbar = ({ history ***REMOVED***) => {
       </HeroHeader>
     </Fragment>
   )
-***REMOVED***
+}
 
 export default withRouter(Navbar)

@@ -1,28 +1,28 @@
-import React, { Fragment ***REMOVED*** from 'react'
+import React, { Fragment } from 'react'
 import useForm from 'react-hook-form'
-import { Field, Control, Button, Help ***REMOVED*** from 'bloomer'
-import { inputClasses, textareaClasses ***REMOVED*** from '../../utils/formClasses'
+import { Field, Control, Button, Help } from 'bloomer'
+import { inputClasses, textareaClasses } from '../../utils/formClasses'
 
-export default ({ addCollection, close ***REMOVED***) => {
-  const { register, handleSubmit, errors, reset ***REMOVED*** = useForm()
+export default ({ addCollection, close }) => {
+  const { register, handleSubmit, errors, reset } = useForm()
 
   const submitForm = (data) => {
     addCollection(data)
     clear()
     close()
-  ***REMOVED***
+  }
 
   const cancel = () => {
     clear()
     close()
-  ***REMOVED***
+  }
 
   const clear = () => {
     reset({
       'name': '',
       'description': ''
-    ***REMOVED***)
-  ***REMOVED***
+    })
+  }
 
   return (
     <Fragment>
@@ -31,41 +31,41 @@ export default ({ addCollection, close ***REMOVED***) => {
       <Field>
         <Control>
           <input
-            className={inputClasses('name', errors)***REMOVED***
+            className={inputClasses('name', errors)}
             type="text"
             name="name"
             placeholder="Name"
             autoFocus=""
             ref={register({
               required: true
-            ***REMOVED***)***REMOVED***
+            })}
           />
         </Control>
         {errors.name && (
-          <Help isColor="danger" className="has-text-left">{errors.name.message***REMOVED***</Help>
-        )***REMOVED***
+          <Help isColor="danger" className="has-text-left">{errors.name.message}</Help>
+        )}
       </Field>
       <Field>
         <Control>
           <textarea
-            className={textareaClasses('name', errors)***REMOVED***
+            className={textareaClasses('name', errors)}
             name="description"
             placeholder="Description"
             ref={register({
               required: true
-            ***REMOVED***)***REMOVED***
+            })}
           />
         </Control>
         {errors.description && (
-          <Help isColor="danger" className="has-text-left">{errors.description.message***REMOVED***</Help>
-        )***REMOVED***
+          <Help isColor="danger" className="has-text-left">{errors.description.message}</Help>
+        )}
       </Field>
       <Field>
-        <Button className="is-danger is-pulled-left" onClick={cancel***REMOVED***>Cancel</Button>
+        <Button className="is-danger is-pulled-left" onClick={cancel}>Cancel</Button>
       </Field>
       <Field>
-        <Button className="is-info is-pulled-right" onClick={handleSubmit(submitForm)***REMOVED***>Submit</Button>
+        <Button className="is-info is-pulled-right" onClick={handleSubmit(submitForm)}>Submit</Button>
       </Field>
     </Fragment>
   )
-***REMOVED***
+}

@@ -3,4 +3,4 @@ import AuthContext from './AuthContext'
 
 export default AuthService
 
-export { AuthContext ***REMOVED***
+export { AuthContext }

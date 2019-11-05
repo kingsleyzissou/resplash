@@ -1,4 +1,4 @@
 import AppLayout from './AppLayout'
 import DashboardLayout from './DashboardLayout'
 
-export { AppLayout, DashboardLayout ***REMOVED***
+export { AppLayout, DashboardLayout }

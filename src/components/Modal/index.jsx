@@ -1,18 +1,18 @@
 import React from 'react'
 import {
   Modal, ModalBackground, ModalContent, ModalCardBody, ModalClose
-***REMOVED*** from 'bloomer'
+} from 'bloomer'
 
-export default ({ active, handleClose, Component, ...rest ***REMOVED***) => {
+export default ({ className, active, handleClose, Component, ...rest }) => {
   return (
-    <Modal isActive={active***REMOVED***>
-      <ModalBackground onClick={handleClose***REMOVED*** />
+    <Modal isActive={active} className={className}>
+      <ModalBackground onClick={handleClose} />
       <ModalContent>
         <ModalCardBody>
-          <Component rest={rest***REMOVED*** />
+          <Component rest={rest} />
         </ModalCardBody>
       </ModalContent>
-      <ModalClose onClick={handleClose***REMOVED*** />
+      <ModalClose onClick={handleClose} />
     </Modal>
   )
-***REMOVED***
+}

@@ -1,5 +1,5 @@
-import React, { Component ***REMOVED*** from 'react'
-import { Columns, Column ***REMOVED*** from 'bloomer'
+import React, { Component } from 'react'
+import { Columns, Column } from 'bloomer'
 import Collection from '../../components/Collection'
 
 class Gallery extends Component {
@@ -8,25 +8,25 @@ class Gallery extends Component {
 
     const collections = this.props.images.map((image, index) => {
       return (
-        <Column key={index***REMOVED***>
+        <Column key={index}>
           <Collection
-            title={image.title***REMOVED***
-            subtitle={image.subtitle***REMOVED***
-            image={image.image***REMOVED***
-            alt={image.alt***REMOVED***
+            title={image.title}
+            subtitle={image.subtitle}
+            image={image.image}
+            alt={image.alt_description}
           />
         </Column>
       )
-    ***REMOVED***);
+    });
 
     return (
       <Columns>
-        {collections***REMOVED***
+        {collections}
       </Columns>
     )
 
-  ***REMOVED***
+  }
 
-***REMOVED***
+}
 
 export default Gallery;

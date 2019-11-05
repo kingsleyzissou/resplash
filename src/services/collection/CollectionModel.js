@@ -1,33 +1,33 @@
-import { db ***REMOVED*** from '../../firebase'
+import { db } from '../../firebase'
 
 class Collection {
 
-  create = ({ uid, name, description ***REMOVED***) => {
+  create = ({ uid, name, description }) => {
     db.collection('collections').add({
-      user: `users/${uid***REMOVED***`,
+      user: `users/${uid}`,
       name,
       description
-    ***REMOVED***)
-  ***REMOVED***
+    })
+  }
 
-  index = async ({ uid ***REMOVED***) => {
+  index = async ({ uid }) => {
     const snapshot = await db.collection('collections')
       .get()
       .catch((error) => {
         throw new Error(error)
-      ***REMOVED***)
+      })
     return snapshot.docs.map(doc => doc.data());
-  ***REMOVED***
+  }
 
-  show = async ({ id ***REMOVED***) => {
+  show = async ({ id }) => {
     let ref = db.collection.doc(id)
     return await ref
       .get()
       .catch((error) => {
         throw new Error(error)
-      ***REMOVED***)
-  ***REMOVED***
+      })
+  }
 
-***REMOVED***
+}
 
 export default Collection

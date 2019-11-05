@@ -1,12 +1,8 @@
-import React, { Component ***REMOVED*** from 'react'
-import {
-  Container, Columns, Column, Button, Level, LevelLeft, LevelRight
-***REMOVED*** from 'bloomer'
-import Loader from 'react-loader-spinner'
-import { AuthContext ***REMOVED*** from '../../services/auth'
-import Collection from '../../components/Collection'
-import Modal from '../../components/Modal'
-import AddCollectionForm from '../../components/AddCollectionForm'
+import React, { Component, Fragment } from 'react'
+import { Container, Columns, Column, Button, Level, LevelLeft, LevelRight } from 'bloomer'
+import { Loader, Collection, Modal, AddCollectionForm } from '../../components'
+import { AuthContext } from '../../services/auth'
+
 
 class Dashboard extends Component {
 
@@ -14,87 +10,84 @@ class Dashboard extends Component {
     loading: true,
     collections: [],
     modalActive: false,
-    user: {***REMOVED***
-  ***REMOVED***
+    user: {}
+  }
 
   componentDidMount = async () => {
     const user = this.context.getCurrentUser()
-    this.setState({ user ***REMOVED***)
+    this.setState({ user })
     await this.listCollections()
-    this.setState({ loading: false ***REMOVED***)
-  ***REMOVED***
+    this.setState({ loading: false })
+  }
 
   listCollections = async () => {
     const collections = await this.props.Collection.index(this.state.user)
       .catch((err) => console.log(err))
-    this.setState({ collections ***REMOVED***)
-  ***REMOVED***
+    this.setState({ collections })
+  }
 
-  addCollection = ({ name, description ***REMOVED***) => {
-    const { uid ***REMOVED*** = this.state.user
-    this.props.Collection.create({ uid, name, description ***REMOVED***)
+  addCollection = ({ name, description }) => {
+    const { uid } = this.state.user
+    this.props.Collection.create({ uid, name, description })
     this.listCollections()
-  ***REMOVED***
+  }
 
   toggleModal = () => {
-    this.setState({ modalActive: !this.state.modalActive ***REMOVED***)
-  ***REMOVED***
+    this.setState({ modalActive: !this.state.modalActive })
+  }
 
   render() {
     return (
-      <Container>
-        <Modal
-          active={this.state.modalActive***REMOVED***
-          handleClose={this.toggleModal***REMOVED***
-          Component={() => <AddCollectionForm addCollection={this.addCollection***REMOVED*** close={this.toggleModal***REMOVED*** />***REMOVED***
-        />
-        <Level>
-          <LevelLeft>
-            <h1 className="title">My Collections</h1>
-          </LevelLeft>
-          <LevelRight>
-            <Button onClick={this.toggleModal***REMOVED***>
-              + Add Collection
-            </Button>
-          </LevelRight>
-        </Level>
-        <hr />
+      <Fragment>
         {
           (this.state.loading) ? (
-            <div className="has-text-centered">
-              <Loader
-                type="Triangle"
-                color="#00BFFF"
-                height={200***REMOVED***
-                width={200***REMOVED***
-              />
-              <h1>Loading...</h1>
-            </div>
+            <Loader
+              fullPage={true}
+              loading={this.state.loading}
+            />
           ) : (
-              <Columns isMultiline isCentered={false***REMOVED***>
-                {
-                  this.state.collections.map((collection, index) => {
-                    return (
-                      <Column isSize={'1/3'***REMOVED*** key={index***REMOVED***>
-                        <Collection
-                          name={'collection.name'***REMOVED***
-                          subtitle={'this'***REMOVED***
-                          image={collection.image***REMOVED***
-                          alt={'stuff'***REMOVED***
-                        />
-                      </Column>
-                    )
-                  ***REMOVED***)
-                ***REMOVED***
-              </Columns>
+              <Container>
+                <Modal
+                  className="modal-fx-3dFlipVertical"
+                  active={this.state.modalActive}
+                  handleClose={this.toggleModal}
+                  Component={() => <AddCollectionForm addCollection={this.addCollection} close={this.toggleModal} />}
+                />
+                <Level>
+                  <LevelLeft>
+                    <h1 className="title">My Collections</h1>
+                  </LevelLeft>
+                  <LevelRight>
+                    <Button onClick={this.toggleModal}>
+                      + Add Collection
+                    </Button>
+                  </LevelRight>
+                </Level>
+                <hr />
+                <Columns isMultiline isCentered={false}>
+                  {
+                    this.state.collections.map((collection, index) => {
+                      return (
+                        <Column isSize={'1/3'} key={index}>
+                          <Collection
+                            name={'collection.name'}
+                            subtitle={'this'}
+                            image={collection.image}
+                            alt={'stuff'}
+                          />
+                        </Column>
+                      )
+                    })
+                  }
+                </Columns>
+              </Container>
             )
-        ***REMOVED***
-
-      </Container>
+        }
+      </Fragment>
     )
-  ***REMOVED***
+  }
 
-***REMOVED***
+}
 
 Dashboard.contextType = AuthContext
 

@@ -1,22 +1,22 @@
-import React, { Fragment ***REMOVED*** from 'react'
-import { Hero, Navbar as Nav, Container ***REMOVED*** from 'bloomer'
+import React, { Fragment } from 'react'
+import { Hero, Navbar as Nav, Container } from 'bloomer'
 
-export default ({ Navbar, Component ***REMOVED***) => {
+export default ({ Navbar, Component }) => {
   return (
     <Fragment>
-      <Hero isColor="info" style={{ overflow: 'scroll', marginBottom: 2 + 'em' ***REMOVED******REMOVED***>
+      <Hero isColor="info" style={{ overflow: 'scroll', marginBottom: 2 + 'em' }}>
         <Navbar />
-        <Nav className="has-shadow has-text-white" style={{ background: '#3AB6FF' ***REMOVED******REMOVED***>
+        <Nav className="has-shadow has-text-white" style={{ background: '#3AB6FF' }}>
           <Container>
             {/* <nav class="breadcrumb has-text-white" aria-label="breadcrumbs">
               <ul>
                 <li>Dashboard&nbsp;</li>
               </ul>
-            </nav> */***REMOVED***
+            </nav> */}
           </Container>
         </Nav>
       </Hero>
       <Component />
     </Fragment >
   )
-***REMOVED***
+}

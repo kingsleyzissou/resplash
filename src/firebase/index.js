@@ -6,6 +6,6 @@ import config from './config'
 firebase.initializeApp(config)
 const db = firebase.firestore()
 
-export { config, db ***REMOVED***
+export { config, db }
 export default firebase
 

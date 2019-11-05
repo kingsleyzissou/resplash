@@ -1,14 +1,14 @@
-const readSession = ({ apiKey ***REMOVED***) => {
+const readSession = ({ apiKey }) => {
   const user = window.sessionStorage.getItem(
-    `firebase:authUser:${apiKey***REMOVED***:[DEFAULT]`
+    `firebase:authUser:${apiKey}:[DEFAULT]`
   )
   return user
-***REMOVED***
+}
 
-const clearSession = ({ apiKey ***REMOVED***) => {
+const clearSession = ({ apiKey }) => {
   window.sessionStorage.removeItem(
-    `firebase:authUser:${apiKey***REMOVED***:[DEFAULT]`
+    `firebase:authUser:${apiKey}:[DEFAULT]`
   )
-***REMOVED***
+}
 
-export { readSession, clearSession ***REMOVED***
+export { readSession, clearSession }

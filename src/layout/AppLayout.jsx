@@ -1,13 +1,13 @@
 import React from 'react'
-import { Hero, HeroBody ***REMOVED*** from 'bloomer'
+import { Hero, HeroBody } from 'bloomer'
 
-export default ({ Navbar, Component ***REMOVED***) => {
+export default ({ Navbar, Component }) => {
   return (
-    <Hero isColor="info" isFullHeight style={{ overflow: 'scroll' ***REMOVED******REMOVED***>
+    <Hero isColor="info" isFullHeight style={{ overflow: 'scroll' }}>
       <Navbar />
       <HeroBody>
         <Component />
       </HeroBody>
     </Hero>
   )
-***REMOVED***
+}

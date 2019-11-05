@@ -4,7 +4,7 @@
   height: 100%;
   margin: auto;
   overflow: hidden;
-***REMOVED***
+}
 
 .collection img {
   width: 110%;
@@ -12,7 +12,7 @@
   -webkit-transition: transform 0.3s ease-in-out 0s;
   -moz-transition: transform 0.3s ease-in-out 0s;
   transition: transform 0.3s ease-in-out 0s;
-***REMOVED***
+}
 
 .collection .overlay {
   background-color: rgba(0,0,0,0.5);
@@ -30,21 +30,21 @@
   -webkit-transition: opacity 0.3s ease-in-out 0s;
   -moz-transition: opacity 0.3s ease-in-out 0s;
   transition: opacity 0.3s ease-in-out 0s;
-***REMOVED***
+}
 
 .collection:hover .overlay,
 .collection:hover .caption {
   opacity: 1;
-***REMOVED***
+}
 
 .collection:hover img {
   transform: scale(1.2, 1.2);
-***REMOVED***
+}
 
 .collection:hover .caption {
   bottom: 0%;
   left: 28%;
-***REMOVED***
+}
 
 .caption {
   z-index: 10;
@@ -60,9 +60,9 @@
   -webkit-transition: all 0.3s ease-in-out 0s;
   -moz-transition: all 0.3s ease-in-out 0s;
   transition: all 0.3s ease-in-out 0s;
-***REMOVED***
+}
 
 .caption-title {
   font-size: 24px;
   font-weight: bold;
-***REMOVED***
+}

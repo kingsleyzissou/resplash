@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf ***REMOVED*** from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import AddCollectionForm from '../src/components/AddCollectionForm'
 import '../src/App.scss'
 

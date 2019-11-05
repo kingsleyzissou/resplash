@@ -11,6 +11,7 @@
     "axios": "^0.19.0",
     "bloomer": "^0.6.5",
     "bulma": "^0.8.0",
+    "bulma-modal-fx": "^1.1.1",
     "classnames": "^2.2.6",
     "firebase": "^7.2.2",
     "node-sass": "^4.13.0",
@@ -21,7 +22,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "session": "^0.1.0"
-  ***REMOVED***,
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -29,10 +30,10 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
-  ***REMOVED***,
+  },
   "eslintConfig": {
     "extends": "react-app"
-  ***REMOVED***,
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -44,7 +45,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  ***REMOVED***,
+  },
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/runtime": "^7.6.3",
@@ -53,5 +54,5 @@
     "@storybook/addons": "^5.2.5",
     "@storybook/react": "^5.2.5",
     "babel-loader": "^8.0.6"
-  ***REMOVED***
-***REMOVED***
+  }
+}
