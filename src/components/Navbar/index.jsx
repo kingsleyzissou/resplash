@@ -23,7 +23,7 @@ const Navbar = ({ history }) => {
   return (
     <Fragment>
       <HeroHeader>
-        <Nav className="main-navbar">
+        <Nav className="is-info main-navbar">
           <Container>
             <NavbarBrand>
               <Link to="/" className="navbar-item">
@@ -53,7 +53,7 @@ const Navbar = ({ history }) => {
                         <img className="is-rounded" src={user.photoURL || '/user.jpg'} alt="User icon" />
                       </figure>
                     </NavbarItem>
-                    <NavbarDropdown>
+                    <NavbarDropdown style={{ zIndex: 99 }}>
                       <Link to="/profile" className="navbar-item" >
                         View Profile
                       </Link>
