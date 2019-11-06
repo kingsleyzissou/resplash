@@ -1,4 +1,4 @@
-import AddCollectionForm from './AddCollectionForm'
+import { AddCollectionForm, EditCollectionForm, DeleteCollectionForm } from './CollectionForms/index'
 import Collection from './Collection'
 import Image from './Image'
 import Lightbox from './Lightbox'
@@ -10,7 +10,7 @@ import RegisterForm from './RegisterForm'
 import PrettyPrintJson from './PrettyPrintJson'
 
 export {
-  AddCollectionForm, Collection, Image,
+  AddCollectionForm, EditCollectionForm, DeleteCollectionForm, Collection, Image,
   Lightbox, Loader, LoginForm, Modal,
   Navbar, RegisterForm, PrettyPrintJson
 }

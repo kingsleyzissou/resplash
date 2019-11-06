@@ -3,11 +3,13 @@ import useForm from 'react-hook-form'
 import { Field, Control, Button, Help } from 'bloomer'
 import { inputClasses, textareaClasses } from '../../utils/formClasses'
 
-export default ({ addCollection, close }) => {
+export default ({ data, editCollection, close }) => {
+  const { id, name, subtitle, description } = data
   const { register, handleSubmit, errors, reset } = useForm()
 
   const submitForm = (data) => {
-    addCollection(data)
+    data.id = id
+    editCollection(data)
     clear()
     close()
   }
@@ -26,7 +28,7 @@ export default ({ addCollection, close }) => {
 
   return (
     <Fragment>
-      <h1 className="title">Add Collection</h1>
+      <h1 className="title">Edit Collection</h1>
       <hr />
       <Field>
         <Control>
@@ -35,6 +37,7 @@ export default ({ addCollection, close }) => {
             type="text"
             name="name"
             placeholder="Name"
+            defaultValue={name}
             autoFocus=""
             ref={register({
               required: true
@@ -47,10 +50,29 @@ export default ({ addCollection, close }) => {
       </Field>
       <Field>
         <Control>
+          <input
+            className={inputClasses('subtitle', errors)}
+            type="text"
+            name="subtitle"
+            placeholder="Subtitle"
+            defaultValue={subtitle}
+            autoFocus=""
+            ref={register({
+              required: true
+            })}
+          />
+        </Control>
+        {errors.subtitle && (
+          <Help isColor="danger" className="has-text-left">{errors.subtitle.message}</Help>
+        )}
+      </Field>
+      <Field>
+        <Control>
           <textarea
             className={textareaClasses('name', errors)}
             name="description"
             placeholder="Description"
+            defaultValue={description}
             ref={register({
               required: true
             })}
@@ -64,7 +86,7 @@ export default ({ addCollection, close }) => {
         <Button className="is-danger is-pulled-left" onClick={cancel}>Cancel</Button>
       </Field>
       <Field>
-        <Button className="is-info is-pulled-right" onClick={handleSubmit(submitForm)}>Submit</Button>
+        <Button className="is-info is-pulled-right" onClick={handleSubmit(submitForm)}>Edit</Button>
       </Field>
     </Fragment>
   )
