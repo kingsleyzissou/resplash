@@ -17,7 +17,6 @@ class Collection {
         throw new Error(error)
       })
     return snapshot.docs.map(doc => {
-      console.log(doc.data())
       return {
         id: doc.id,
         ...doc.data()

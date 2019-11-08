@@ -38,6 +38,7 @@ const Search = () => {
   const [lightbox, setLightbox] = useState(false)
   const [modal, setModal] = useState(false)
   const [user, setUser] = useState({})
+  const [mounted, setMounted] = useState(false)
   const auth = useContext(AuthContext)
   const api = useContext(ApiContext)
 
@@ -86,14 +87,21 @@ const Search = () => {
   }, [search])
 
   useEffect(() => {
-    if (!user) return
-    setLoading(true)
-    api.getCollectionModel().index({ uid: user.uid })
-      .then((res) => setCollections(res))
-      .then(() => setLoading(false))
-      .catch((err) => console.log(err))
-      .then(() => setLoading(false))
-  }, [user, api])
+    setMounted(true)
+    const aysncData = (() => {
+      api.getCollectionModel().index({ uid: user.uid })
+        .then((res) => setCollections(res))
+        .then(() => setLoading(false))
+        .catch((err) => console.log(err))
+        .then(() => setLoading(false))
+    })
+    if (mounted) {
+      aysncData()
+    }
+    return () => {
+      setMounted(false)
+    }
+  }, [user, api, loading, mounted])
 
   const openModal = (result) => {
     setCurrent(filterResult(result))
@@ -107,7 +115,6 @@ const Search = () => {
 
   const selectCollection = ({ collection }) => {
     const Image = api.getImageModel()
-    console.log(api)
     Image.add({ collection, image: current })
   }
 

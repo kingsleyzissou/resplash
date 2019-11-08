@@ -7,8 +7,8 @@ import Navbar from '../components/Navbar'
 import { AppLayout, DashboardLayout } from '../layout'
 
 const RouteComponent = ({ type, component: Component, ...rest }) => {
-  if (type === 'guest') return <GuestRoute component={Component}  {...rest} />
   if (type === 'protected') return <ProtectedRoute component={Component} {...rest} />
+  if (type === 'guest') return <GuestRoute component={Component}  {...rest} />
   return <Route {...rest} component={Component} />
 }
 

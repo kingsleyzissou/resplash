@@ -4,7 +4,6 @@ import { Field, Button } from 'bloomer'
 export default ({ id, deleteCollection, close }) => {
 
   const handleSubmit = () => {
-    console.log(id)
     deleteCollection({ id })
     close()
   }
