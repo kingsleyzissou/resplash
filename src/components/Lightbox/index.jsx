@@ -14,7 +14,7 @@ export default (props) => {
         <Card>
           <CardImage>
             <figure>
-              <img src={props.src} alt={props.alt} style={{ width: '400px', height: '300px', objectFit: 'cover' }} />
+              <img src={props.src} alt={props.alt} className="lightbox-image" />
             </figure>
           </CardImage>
           <CardContent>

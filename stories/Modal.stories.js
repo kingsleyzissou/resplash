@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
-import Modal from '../src/components/Modal'
+import { Modal } from '../src/components'
 import '../src/App.scss'
 
 const stories = storiesOf('Resplash Modal component', module);

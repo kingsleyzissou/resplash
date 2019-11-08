@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LoginForm from '../src/components/LoginForm'
+import { LoginForm } from '../src/components'
 import '../src/App.scss'
 
 const stories = storiesOf('Resplash Login Form component', module);

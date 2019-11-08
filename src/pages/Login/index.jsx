@@ -10,7 +10,7 @@ const Login = () => {
   const auth = useContext(AuthContext)
   return (
     <Container hasTextAlign="centered">
-      <Column isSize={6} isOffset={3}>
+      <Column isSize={4} isOffset={4}>
         <Box className="login-form" >
           <FontAwesomeIcon icon={Coffee} size="2x" style={{ color: '#fff' }} />
           <h1 className="title">Login</h1>

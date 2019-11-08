@@ -35,7 +35,6 @@ const Navbar = ({ history }) => {
             </NavbarBrand>
             <NavbarMenu isActive={isActive}>
               <NavbarEnd>
-                <Link to="/" className="navbar-item">Dashboard</Link>
                 {
                   !authenticated && (
                     <Fragment>
@@ -46,25 +45,29 @@ const Navbar = ({ history }) => {
                 }
                 {
                   authenticated &&
-                  <NavbarItem hasDropdown isHoverable>
-                    <NavbarItem href="#" className="navbar-link">
-                      <span>{user.displayName || user.email}&nbsp;&nbsp;</span>
-                      <figure className="image is-24x24">
-                        <img className="is-rounded" src={user.photoURL || '/user.jpg'} alt="User icon" />
-                      </figure>
-                    </NavbarItem>
-                    <NavbarDropdown style={{ zIndex: 99 }}>
-                      <Link to="/profile" className="navbar-item" >
-                        View Profile
-                      </Link>
-                      <NavbarDivider />
-                      <NavbarItem href="#"
-                        onClick={logout}
-                      >
-                        Logout
+                  <Fragment>
+                    <Link to="/dashboard" className="navbar-item">Dashboard</Link>
+                    <Link to="/search" className="navbar-item">Search</Link>
+                    <NavbarItem hasDropdown isHoverable>
+                      <NavbarItem href="#" className="navbar-link">
+                        <span>{user.displayName || user.email}&nbsp;&nbsp;</span>
+                        <figure className="image is-24x24">
+                          <img className="is-rounded" src={user.photoURL || '/user.jpg'} alt="User icon" />
+                        </figure>
                       </NavbarItem>
-                    </NavbarDropdown>
-                  </NavbarItem>
+                      <NavbarDropdown style={{ zIndex: 99 }}>
+                        <Link to="/profile" className="navbar-item" >
+                          View Profile
+                      </Link>
+                        <NavbarDivider />
+                        <NavbarItem href="#"
+                          onClick={logout}
+                        >
+                          Logout
+                      </NavbarItem>
+                      </NavbarDropdown>
+                    </NavbarItem>
+                  </Fragment>
                 }
               </NavbarEnd>
             </NavbarMenu>

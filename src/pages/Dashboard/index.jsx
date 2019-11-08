@@ -153,10 +153,11 @@ class Dashboard extends Component {
                             id={collection.id}
                             name={collection.name}
                             subtitle={collection.subtitle}
-                            image={collection.image}
+                            src={collection.image}
                             description={collection.description}
                             setData={this.setModalData}
-                            showCollection={this.showCollection}
+                            showAction={this.showCollection}
+                            type={'collection'}
                             openEditModal={() => this.toggleModal('editModal')}
                             openDeleteModal={() => this.toggleModal('deleteModal')}
                           />

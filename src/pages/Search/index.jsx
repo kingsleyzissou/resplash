@@ -5,6 +5,7 @@ import { Loader, Lightbox, Modal, SelectCollectionForm } from '../../components'
 import { withRouter } from 'react-router-dom'
 import AuthContext from '../../services/auth/AuthContext'
 import ApiContext from '../../services/api/ApiContext'
+import lightBoxInitState from '../../components/Lightbox/initState'
 
 const filterResult = (result) => {
   const { id, user, alt_description, description, urls } = result
@@ -39,30 +40,13 @@ const Search = () => {
   const [modal, setModal] = useState(false)
   const [user, setUser] = useState({})
   const [mounted, setMounted] = useState(false)
+  const [current, setCurrent] = useState(lightBoxInitState)
   const auth = useContext(AuthContext)
   const api = useContext(ApiContext)
 
   useEffect(() => {
     setUser(auth.getCurrentUser())
   }, [auth, setUser])
-
-  const [current, setCurrent] = useState({
-    id: '',
-    urls: {
-      regular: '',
-      full: ''
-    },
-    alt_description: '',
-    description: '',
-    user: {
-      id: '',
-      name: '',
-      username: '',
-      profile_image: {
-        small: ''
-      }
-    }
-  })
 
   const handleChange = (event) => {
     setQuery(event.target.value)

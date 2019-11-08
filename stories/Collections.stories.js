@@ -28,5 +28,5 @@ const images = [
 ];
 
 storiesOf('Resplash Gallery page', module).add('default', () => (
-  <Gallery images={images} />
+  <Collection images={images} />
 ));

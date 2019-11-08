@@ -13,7 +13,7 @@ let routes = [
     name: 'collection', exact: false, path: '/collection/:id', dashboard: true, type: 'protected', main: () =>
       <ApiContext.Consumer>
         {api =>
-          <Collection Collection={api.getCollectionModel()} />
+          <Collection api={api} />
         }
       </ApiContext.Consumer>
   },

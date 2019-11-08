@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { Columns, Column, Level, LevelRight, LevelLeft, Button } from 'bloomer'
-import CollectionComponent from '../../components/Collection'
+import { Loader, Collection as CollectionComponent, Lightbox } from '../../components'
 import { AuthContext } from '../../services/auth'
 import { withRouter } from 'react-router-dom'
+import lightboxInitState from '../../components/Lightbox/initState'
 
 class Collection extends Component {
 
@@ -14,7 +15,9 @@ class Collection extends Component {
   state = {
     loading: true,
     user: {},
-    collection: {}
+    collection: {},
+    current: lightboxInitState,
+    lightbox: false
   }
 
   componentDidMount = async () => {
@@ -31,67 +34,83 @@ class Collection extends Component {
 
   getCollection = async () => {
     const { id } = this.props.match.params
-    let collection = await this.props.Collection.show({ id })
+    const Collection = this.props.api.getCollectionModel()
+    const collection = await Collection.show({ id })
       .catch((err) => console.log(err))
-    console.log(collection)
     this._mounted && this.setState({ collection })
+  }
+
+  removeImage = () => {
+    const collection = this.props.match.params.id
+    const Image = this.props.api.getImageModel()
+    Image.remove({ collection, image: this.state.current })
+    this.getCollection()
+  }
+
+  showImage = ({ image }) => {
+    this.setState({
+      current: image,
+      lightbox: true
+    })
   }
 
   render() {
 
-    const images = [
-      {
-        key: 1,
-        title: 'Sample text',
-        subtitle: 'Sample sub',
-        image: 'https://bulma.io/images/placeholders/480x480.png',
-        alt_description: 'Description'
-      },
-      {
-        key: 2,
-        title: 'Sample text',
-        subtitle: 'Sample sub',
-        image: 'https://bulma.io/images/placeholders/480x480.png',
-        alt_description: 'Description'
-      },
-      {
-        key: 3,
-        title: 'Sample text',
-        subtitle: 'Sample sub',
-        image: 'https://bulma.io/images/placeholders/480x480.png',
-        alt_description: 'Description'
-      }
-    ];
-
-    const imagesList = images.map((image, index) => {
-      return (
-        <Column key={index}>
-          <CollectionComponent
-            title={image.title}
-            subtitle={image.subtitle}
-            image={image.image}
-            alt={image.alt_description}
-          />
-        </Column>
-      )
-    });
-
+    const { current } = this.state
     return (
       <Fragment>
-        <Level>
-          <LevelLeft>
-            <h1 className="title">My Collections</h1>
-          </LevelLeft>
-          <LevelRight>
-            <Button onClick={() => this.toggleModal('addModal')}>
-              + Add Collection
+        {
+          (this.state.loading) ? (
+            <Loader
+              fullPage={true}
+              loading={this.state.loading}
+            />
+          ) : (
+              <Fragment>
+                <Lightbox
+                  active={this.state.lightbox}
+                  className="modal modal-fx-fadeInScale modal-full-screen"
+                  src={current.urls.regular}
+                  alt={current.alt_description}
+                  description={current.description}
+                  user={current.user}
+                  fromSearch={false}
+                  contextAction={this.removeImage}
+                  handleClose={() => this.setState({ lightbox: false })}
+                />
+                <Level>
+                  <LevelLeft>
+                    <h1 className="title">My Collections</h1>
+                  </LevelLeft>
+                  <LevelRight>
+                    <Button onClick={() => this.toggleModal('addModal')}>
+                      + Add Collection
                     </Button>
-          </LevelRight>
-        </Level>
-        <hr />
-        <Columns>
-          {imagesList}
-        </Columns>
+                  </LevelRight>
+                </Level>
+                <hr />
+                <Columns>
+                  {
+                    this.state.collection.images.map((image, index) => {
+                      return (
+                        <Column isSize={'1/3'} key={index}>
+                          <CollectionComponent
+                            title={image.title}
+                            subtitle={image.subtitle}
+                            src={image.urls.regular}
+                            alt={image.alt_description}
+                            image={image}
+                            type={'image'}
+                            showAction={this.showImage}
+                          />
+                        </Column>
+                      )
+                    })
+                  }
+                </Columns>
+              </Fragment>
+            )
+        }
       </Fragment>
     )
 

@@ -5,12 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit as Edit, faTrash as Trash } from "@fortawesome/free-solid-svg-icons";
 
 export default (props) => {
-  let image = (props.image) ? props.image : '/placeholder.jpg'
+  let src = (props.src) ? props.src : '/placeholder.jpg'
   let alt = (props.alt) ? props.alt : 'Placeholder'
 
-  const showCollection = () => {
-    const { id } = props
-    props.showCollection({ id })
+  const showAction = () => {
+    const { id, image } = props
+    let ref = (props.type === 'collection') ? { id } : { image };
+    console.log(ref)
+    props.showAction(ref)
   }
 
   const handleModal = (modal) => {
@@ -47,10 +49,10 @@ export default (props) => {
         </Button>
       </div>
       <span className="overlay"
-        onClick={showCollection}
+        onClick={showAction}
       >
       </span>
-      <img src={image} alt={alt} />
+      <img src={src} alt={alt} className="collection-image" />
     </figure>
   )
 

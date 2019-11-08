@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import AddCollectionForm from '../src/components/AddCollectionForm'
+import { AddCollectionForm } from '../src/components'
 import '../src/App.scss'
 
 const stories = storiesOf('Resplash Add Collection Form component', module);

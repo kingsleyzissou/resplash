@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react';
-import Collection from '../src/components/Collection'
+import { Collection } from '../src/components'
 import '../src/App.scss'
 
 const image = {

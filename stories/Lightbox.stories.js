@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import Lightbox from '../src/components/Lightbox'
+import { Lightbox } from '../src/components'
 import '../src/App.scss'
 
 const stories = storiesOf('Resplash Lightbox component', module);

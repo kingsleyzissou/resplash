@@ -55,15 +55,11 @@ class Image {
       })
   }
 
-  delete = async ({ collection, image }) => {
-    return await db
-      .collection('collections')
+  remove = async ({ collection, image }) => {
+    return await db.collection('collections')
       .doc(collection)
-      .collection('images')
-      .doc(image)
-      .delete()
-      .catch((error) => {
-        throw new Error(error)
+      .update({
+        images: firebase.firestore.FieldValue.arrayRemove(image)
       })
   }
 
