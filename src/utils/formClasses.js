@@ -16,4 +16,13 @@ const textareaClasses = (field, errors) => {
   });
 }
 
-export { inputClasses, textareaClasses }
+const selectClasses = (field, errors) => {
+  return classNames({
+    'select': true,
+    'is-fullwidth': true,
+    'is-large': true,
+    'is-danger': errors[field],
+  });
+}
+
+export { inputClasses, textareaClasses, selectClasses }

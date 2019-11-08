@@ -17,19 +17,25 @@ class Collection {
         throw new Error(error)
       })
     return snapshot.docs.map(doc => {
-      let data = doc.data()
-      data.id = doc.id
-      return data
+      console.log(doc.data())
+      return {
+        id: doc.id,
+        ...doc.data()
+      }
     });
   }
 
   show = async ({ id }) => {
-    let ref = db.collection('collections').doc(id)
-    return await ref
+    const ref = db.collection('collections').doc(id)
+    const snapshot = await ref
       .get()
       .catch((error) => {
         throw new Error(error)
       })
+    return {
+      id: snapshot.id,
+      ...snapshot.data()
+    }
   }
 
   update = async (data) => {

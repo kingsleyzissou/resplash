@@ -8,6 +8,11 @@ export default (props) => {
   let image = (props.image) ? props.image : '/placeholder.jpg'
   let alt = (props.alt) ? props.alt : 'Placeholder'
 
+  const showCollection = () => {
+    const { id } = props
+    props.showCollection({ id })
+  }
+
   const handleModal = (modal) => {
     const { id, name, subtitle, description } = props
     props.setData({ id, name, subtitle, description })
@@ -41,7 +46,10 @@ export default (props) => {
           <FontAwesomeIcon icon={Trash} size="1x" />
         </Button>
       </div>
-      <span className="overlay"></span>
+      <span className="overlay"
+        onClick={showCollection}
+      >
+      </span>
       <img src={image} alt={alt} />
     </figure>
   )

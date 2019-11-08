@@ -1,10 +1,14 @@
 import React, { Component, Fragment } from 'react'
-import { Container, Columns, Column, Button, Level, LevelLeft, LevelRight } from 'bloomer'
+import {
+  Container, Columns, Column, Button, Level,
+  LevelLeft, LevelRight
+} from 'bloomer'
 import {
   Loader, Collection, Modal, AddCollectionForm,
   EditCollectionForm, DeleteCollectionForm
 } from '../../components'
 import { AuthContext } from '../../services/auth'
+import { withRouter } from 'react-router-dom'
 
 
 class Dashboard extends Component {
@@ -45,6 +49,10 @@ class Dashboard extends Component {
     let collections = await this.props.Collection.index(this.state.user)
       .catch((err) => console.log(err))
     this._mounted && this.setState({ collections })
+  }
+
+  showCollection = ({ id }) => {
+    this.props.history.push(`collection/${id}`)
   }
 
   addCollection = ({ name, subtitle, description }) => {
@@ -148,6 +156,7 @@ class Dashboard extends Component {
                             image={collection.image}
                             description={collection.description}
                             setData={this.setModalData}
+                            showCollection={this.showCollection}
                             openEditModal={() => this.toggleModal('editModal')}
                             openDeleteModal={() => this.toggleModal('deleteModal')}
                           />
@@ -167,4 +176,4 @@ class Dashboard extends Component {
 
 Dashboard.contextType = AuthContext
 
-export default Dashboard
+export default withRouter(Dashboard)

@@ -3,6 +3,7 @@ import Login from '../pages/Login'
 import Search from '../pages/Search'
 import Register from '../pages/Register'
 import Dashboard from '../pages/Dashboard'
+import Collection from '../pages/Collection'
 import { ApiContext } from '../services/api'
 
 let routes = [
@@ -11,6 +12,14 @@ let routes = [
       <ApiContext.Consumer>
         {api =>
           <Dashboard Collection={api.getCollectionModel()} />
+        }
+      </ApiContext.Consumer>
+  },
+  {
+    name: 'dashboard', exact: true, path: '/collection/:id', dashboard: true, type: 'protected', main: () =>
+      <ApiContext.Consumer>
+        {api =>
+          <Collection Collection={api.getCollectionModel()} />
         }
       </ApiContext.Consumer>
   },

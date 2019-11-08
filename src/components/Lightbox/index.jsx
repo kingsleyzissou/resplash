@@ -42,6 +42,7 @@ export default (props) => {
               (props.fromSearch) ?
                 (< p
                   className="card-footer-item"
+                  onClick={props.contextAction}
                   style={{
                     color: '#fff',
                     backgroundColor: 'hsl(204, 86%, 53%)'
@@ -51,6 +52,7 @@ export default (props) => {
                   </p>) :
                 (< p
                   className="card-footer-item"
+                  onClick={props.contextAction}
                   style={{
                     color: '#fff',
                     backgroundColor: 'hsl(348, 100%, 61%)'

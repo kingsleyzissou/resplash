@@ -1,21 +1,55 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useContext } from 'react'
 import axios from '../../utils/axios'
 import { Container, Field, Control, Button, Columns, Column } from 'bloomer'
-import Loader from 'react-loader-spinner'
-// import Modal from '../../components/Modal'
-// import Test from '../../components/PrettyPrintJson'
-import { Lightbox } from '../../components'
+import { Loader, Lightbox, Modal, SelectCollectionForm } from '../../components'
+import { withRouter } from 'react-router-dom'
+import AuthContext from '../../services/auth/AuthContext'
+import ApiContext from '../../services/api/ApiContext'
+
+const filterResult = (result) => {
+  const { id, user, alt_description, description, urls } = result
+  const { name, username, profile_image } = user
+  return {
+    id,
+    urls: {
+      regular: urls.regular,
+      full: urls.full
+    },
+    alt_description,
+    description,
+    user: {
+      id: user.id,
+      name,
+      username,
+      profile_image: {
+        medium: profile_image.medium
+      }
+    }
+  }
+}
 
 const Search = () => {
   const q = useRef()
   const [loading, setLoading] = useState(false)
   const [query, setQuery] = useState('')
   const [page, setPage] = useState(1)
+  const [collections, setCollections] = useState([])
   const [results, setResults] = useState([])
+  const [lightbox, setLightbox] = useState(false)
   const [modal, setModal] = useState(false)
+  const [user, setUser] = useState({})
+  const auth = useContext(AuthContext)
+  const api = useContext(ApiContext)
+
+  useEffect(() => {
+    setUser(auth.getCurrentUser())
+  }, [auth, setUser])
+
   const [current, setCurrent] = useState({
+    id: '',
     urls: {
-      regular: ''
+      regular: '',
+      full: ''
     },
     alt_description: '',
     description: '',
@@ -51,22 +85,61 @@ const Search = () => {
     search()
   }, [search])
 
+  useEffect(() => {
+    if (!user) return
+    setLoading(true)
+    api.getCollectionModel().index({ uid: user.uid })
+      .then((res) => setCollections(res))
+      .then(() => setLoading(false))
+      .catch((err) => console.log(err))
+      .then(() => setLoading(false))
+  }, [user, api])
+
   const openModal = (result) => {
-    setCurrent(result)
+    setCurrent(filterResult(result))
+    setLightbox(true)
+  }
+
+  const addToCollection = () => {
+    setLightbox(false)
     setModal(true)
   }
+
+  const selectCollection = ({ collection }) => {
+    const Image = api.getImageModel()
+    console.log(api)
+    Image.add({ collection, image: current })
+  }
+
+  if (loading) return <Loader
+    fullPage={true}
+    loading={loading}
+  />
 
   return (
     <Container>
       <Lightbox
-        active={modal}
+        active={lightbox}
         className="modal modal-fx-fadeInScale modal-full-screen"
         src={current.urls.regular}
         alt={current.alt_description}
         description={current.description}
         user={current.user}
         fromSearch={true}
+        contextAction={addToCollection}
+        handleClose={() => setLightbox(false)}
+      />
+      <Modal
+        className="modal-fx-slideLeft"
+        active={modal}
         handleClose={() => setModal(false)}
+        Component={() => {
+          return <SelectCollectionForm
+            collections={collections}
+            selectCollection={selectCollection}
+            close={() => setModal(false)}
+          />
+        }}
       />
       <h1 className="title">Search for images</h1>
       <Field className="has-addons">
@@ -91,36 +164,22 @@ const Search = () => {
         </Control>
       </Field>
       <hr />
-      {
-        (loading) ? (
-          <div className="has-text-centered">
-            <Loader
-              type="Triangle"
-              color="#00BFFF"
-              height={200}
-              width={200}
-            />
-            <h1>Loading...</h1>
-          </div>
-        ) : (
-            <Columns isMultiline>
-              {
-                results.length > 0 && results.map((result, index) => {
-                  return (
-                    <Column key={index} isSize={'1/3'}>
-                      <figure
-                        className="image is-256by256"
-                        onClick={() => openModal(result)}
-                      >
-                        <img src={result.urls.regular} alt={result.alt_description} />
-                      </figure>
-                    </Column>
-                  )
-                })
-              }
-            </Columns>
-          )
-      }
+      <Columns isMultiline>
+        {
+          results.length > 0 && results.map((result, index) => {
+            return (
+              <Column key={index} isSize={'1/3'}>
+                <figure
+                  className="image is-256by256"
+                  onClick={() => openModal(result)}
+                >
+                  <img src={result.urls.regular} alt={result.alt_description} />
+                </figure>
+              </Column>
+            )
+          })
+        }
+      </Columns>
       <Field>
         {(results.length > 0 && page > 1) &&
           <Button
@@ -146,4 +205,4 @@ const Search = () => {
   )
 }
 
-export default Search
+export default withRouter(Search)
