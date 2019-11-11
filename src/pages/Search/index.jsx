@@ -6,8 +6,8 @@ import lightBoxInitState from '../../components/Lightbox/initState'
 import alertInitState from '../../components/Alert/initState'
 import filterResult from './filterResult'
 import Masonry from 'react-masonry-css'
-import useSearch from './useSearch'
-import useFetchCollections from './useFetchCollection'
+import useSearch from '../../utils/useSearch'
+import useFetchCollections from '../../utils/useFetchCollections'
 
 
 

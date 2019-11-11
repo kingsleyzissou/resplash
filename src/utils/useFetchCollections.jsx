@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react'
-import AuthContext from '../../services/auth/AuthContext'
-import ApiContext from '../../services/api/ApiContext'
+import AuthContext from '../services/auth/AuthContext'
+import ApiContext from '../services/api/ApiContext'
 
 const useFetchUser = () => {
   const auth = useContext(AuthContext)
@@ -35,7 +35,7 @@ const useFetchCollections = (loading, setLoading) => {
     return () => setMounted(false)
   }, [user, api, loading, setLoading, mounted])
 
-  return [collections, api]
+  return [collections, api, user]
 }
 
 export default useFetchCollections

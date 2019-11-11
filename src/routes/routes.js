@@ -2,8 +2,9 @@ import React from 'react'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Search from '../pages/Search'
-import Register from '../pages/Register'
+import Profile from '../pages/Profile'
 import Recover from '../pages/Recover'
+import Register from '../pages/Register'
 import Dashboard from '../pages/Dashboard'
 import Collection from '../pages/Collection'
 import { ApiContext } from '../services/api'
@@ -27,6 +28,14 @@ let routes = [
       <ApiContext.Consumer>
         {api =>
           <Dashboard Collection={api.getCollectionModel()} />
+        }
+      </ApiContext.Consumer>
+  },
+  {
+    name: 'profile', exact: true, path: '/profile', dashboard: true, type: 'protected', main: () =>
+      <ApiContext.Consumer>
+        {api =>
+          <Profile api={api} />
         }
       </ApiContext.Consumer>
   },
