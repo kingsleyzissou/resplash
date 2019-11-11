@@ -10,7 +10,7 @@ stories.addDecorator(withKnobs);
 const image = {
   title: 'Sample text',
   subtitle: 'Sample sub',
-  src: 'https://bulma.io/images/placeholders/480x480.png',
+  src: 'https://bulma.io/images/placeholders/640x480.png',
   alt_description: 'Description',
   description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit,
   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -18,6 +18,14 @@ const image = {
   commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
   dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
 culpa qui officia deserunt mollit anim id est laborum.`
+}
+
+const user = {
+  profile_image: {
+    medium: 'https://bulma.io/images/placeholders/480x480.png'
+  },
+  name: 'Nome Cognome',
+  username: 'incongnito'
 }
 
 stories.add("default", () => (
@@ -28,6 +36,7 @@ stories.add("default", () => (
       src={image.src}
       alt={image.alt_description}
       description={image.description}
+      user={user}
     />
   </Fragment>
 ));
