@@ -12,6 +12,7 @@ class Collection {
 
   index = async ({ uid }) => {
     const snapshot = await db.collection('collections')
+      .where('user', '==', `users/${uid}`)
       .get()
       .catch((error) => {
         throw new Error(error)

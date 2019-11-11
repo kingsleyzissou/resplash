@@ -11,6 +11,7 @@ const LoginForm = ({ auth, history }) => {
 
   const { register, handleSubmit, errors } = useForm()
   const [errs, setErrs] = useState({ message: '' })
+  const [loading, setLoading] = useState(false)
 
   const clearError = () => {
     const error = { message: '' }
@@ -18,15 +19,23 @@ const LoginForm = ({ auth, history }) => {
   }
 
   const login = ({ email, password }) => {
+    setLoading(true)
     auth.login(email, password)
       .then(() => history.push('/dashboard'))
-      .catch(({ message }) => setErrs({ message }))
+      .catch(({ message }) => {
+        setErrs({ message })
+        setLoading(false)
+      })
   }
 
   const googleLogin = () => {
+    setLoading(true)
     auth.googleLogin()
       .then(() => history.push('/dashboard'))
-      .catch(({ message }) => setErrs({ message }))
+      .catch(({ message }) => {
+        setErrs({ message })
+        setLoading(false)
+      })
   }
 
   return (
@@ -77,7 +86,14 @@ const LoginForm = ({ auth, history }) => {
             <Help isColor="danger" className="has-text-left">{errors.password.message}</Help>
           )}
         </Field>
-        <Button onClick={handleSubmit(login)} isColor="info" isSize="large" isFullWidth>Login</Button>
+        <Button
+          onClick={handleSubmit(login)}
+          isColor="info" isSize="large"
+          isFullWidth
+          isLoading={loading}
+        >
+          Login
+        </Button>
         <hr />
         <p className="has-text-white" style={{ marginBottom: 1 + 'em' }}>Or Login with</p>
         <Button onClick={googleLogin}>

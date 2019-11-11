@@ -8,7 +8,7 @@ import Alert from './Alert'
 import PrettyPrintJson from './PrettyPrintJson'
 import {
   LoginForm, RegisterForm,
-  RecoverForm, ResetForm
+  RecoverForm
 } from './Auth'
 import {
   AddCollectionForm, EditCollectionForm,
@@ -20,5 +20,5 @@ export {
   AddCollectionForm, EditCollectionForm, DeleteCollectionForm,
   SelectCollectionForm, Collection, Image,
   Lightbox, Loader, LoginForm, Modal,
-  Navbar, Alert, RegisterForm, RecoverForm, ResetForm, PrettyPrintJson
+  Navbar, Alert, RegisterForm, RecoverForm, PrettyPrintJson
 }

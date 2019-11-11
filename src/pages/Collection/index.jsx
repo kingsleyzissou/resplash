@@ -111,6 +111,13 @@ class Collection extends Component {
                   </LevelRight>
                 </Level>
                 <hr />
+                {
+                  this.state.collection.images.length === 0 &&
+                  <h1 className="has-text-centered">
+                    This collection doesn't have any images.
+                    To add images, use the search feature.
+                  </h1>
+                }
                 <Masonry
                   breakpointCols={3}
                   className="my-masonry-grid"

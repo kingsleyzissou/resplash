@@ -10,6 +10,7 @@ const RecoverForm = ({ auth, history }) => {
 
   const { register, handleSubmit, errors } = useForm()
   const [errs, setErrs] = useState({ message: '' })
+  const [loading, setLoading] = useState(false)
 
   const clearError = () => {
     const error = { message: '' }
@@ -17,9 +18,13 @@ const RecoverForm = ({ auth, history }) => {
   }
 
   const reset = ({ email }) => {
+    setLoading(true)
     auth.recover(email)
       .then(() => history.push('/login'))
-      .catch(({ message }) => setErrs({ message }))
+      .catch(({ message }) => {
+        setErrs({ message })
+        setLoading(false)
+      })
   }
 
   return (
@@ -55,7 +60,15 @@ const RecoverForm = ({ auth, history }) => {
             <Help isColor="danger" className="has-text-left">{errors.email.message}</Help>
           )}
         </Field>
-        <Button onClick={handleSubmit(reset)} isColor="info" isSize="large" isFullWidth>Reset</Button>
+        <Button
+          onClick={handleSubmit(reset)}
+          isColor="info"
+          isSize="large"
+          isFullWidth
+          isLoading={loading}
+        >
+          Reset
+        </Button>
       </Box>
     </Fragment>
   )

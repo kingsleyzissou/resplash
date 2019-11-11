@@ -37,7 +37,7 @@ class Dashboard extends Component {
     this._mounted = true
     const user = this.context.getCurrentUser()
     this._mounted && this.setState({ user })
-    await this.listCollections()
+    await this.listCollections(user)
     this._mounted && this.setState({ loading: false })
   }
 
@@ -45,8 +45,8 @@ class Dashboard extends Component {
     this._mounted = false
   }
 
-  listCollections = async () => {
-    let collections = await this.props.Collection.index(this.state.user)
+  listCollections = async ({ uid }) => {
+    let collections = await this.props.Collection.index({ uid })
       .catch((err) => console.log(err))
     this._mounted && this.setState({ collections })
   }
@@ -67,13 +67,13 @@ class Dashboard extends Component {
     data.user = `users/${uid}`
     this.props.Collection.update(data)
       .catch(err => console.log(err))
-    this.listCollections()
+    this.listCollections(this.state.user)
   }
 
   deleteCollection = ({ id }) => {
     this.props.Collection.delete({ id })
       .catch(err => console.log(err))
-    this.listCollections()
+    this.listCollections(this.state.user)
   }
 
   toggleModal = (modal) => {
@@ -144,6 +144,12 @@ class Dashboard extends Component {
                   </LevelRight>
                 </Level>
                 <hr />
+                {
+                  this.state.collections.length === 0 &&
+                  <h1 className="has-text-centered">
+                    Create a collection to get started
+                  </h1>
+                }
                 <Masonry
                   breakpointCols={3}
                   className="my-masonry-grid"

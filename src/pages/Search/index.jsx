@@ -1,73 +1,32 @@
-import React, { useState, useEffect, useRef, useCallback, useContext } from 'react'
-import axios from '../../utils/axios'
+import React, { useState } from 'react'
 import { Container, Field, Control, Button } from 'bloomer'
 import { Loader, Lightbox, Modal, Alert, SelectCollectionForm } from '../../components'
 import { withRouter } from 'react-router-dom'
-import AuthContext from '../../services/auth/AuthContext'
-import ApiContext from '../../services/api/ApiContext'
 import lightBoxInitState from '../../components/Lightbox/initState'
 import alertInitState from '../../components/Alert/initState'
 import filterResult from './filterResult'
 import Masonry from 'react-masonry-css'
+import useSearch from './useSearch'
+import useFetchCollections from './useFetchCollection'
+
+
 
 const Search = () => {
-  const q = useRef()
   const [loading, setLoading] = useState(false)
   const [query, setQuery] = useState('')
   const [page, setPage] = useState(1)
-  const [collections, setCollections] = useState([])
-  const [results, setResults] = useState([])
   const [lightbox, setLightbox] = useState(false)
   const [modal, setModal] = useState(false)
-  const [user, setUser] = useState({})
-  const [mounted, setMounted] = useState(false)
   const [current, setCurrent] = useState(lightBoxInitState)
   const [alert, setAlert] = useState(alertInitState)
-  const auth = useContext(AuthContext)
-  const api = useContext(ApiContext)
 
-  useEffect(() => {
-    setUser(auth.getCurrentUser())
-  }, [auth, setUser])
+  // Handle api calls
+  const [collections, api] = useFetchCollections(loading, setLoading)
+  const [results, search, q] = useSearch(page, setLoading)
 
   const handleChange = (event) => {
     setQuery(event.target.value)
   }
-
-  const search = useCallback(async () => {
-    let query = q.current.value
-    if (!query || query === '') return
-    setLoading(true)
-    const { data } = await axios.get('/', {
-      params: {
-        query, page
-      }
-    })
-      .catch((error) => error)
-    setLoading(false)
-    setResults(data.results)
-  }, [page, q])
-
-  useEffect(() => {
-    search()
-  }, [search])
-
-  useEffect(() => {
-    setMounted(true)
-    const aysncData = (() => {
-      api.getCollectionModel().index({ uid: user.uid })
-        .then((res) => setCollections(res))
-        .then(() => setLoading(false))
-        .catch((err) => console.log(err))
-        .then(() => setLoading(false))
-    })
-    if (mounted) {
-      aysncData()
-    }
-    return () => {
-      setMounted(false)
-    }
-  }, [user, api, loading, mounted])
 
   const openModal = (result) => {
     setCurrent(filterResult(result))
@@ -176,10 +135,20 @@ const Search = () => {
             return (
               <figure
                 key={index}
-                className="image is-256by256"
+                style={{ marginBottom: '30px', cursor: 'pointer' }}
+                className="collection"
                 onClick={() => openModal(result)}
               >
-                <img src={result.urls.regular} alt={result.alt_description} />
+
+                <span
+                  onClick={() => openModal(result)}
+                  className="overlay"
+                ></span>
+                <img
+                  className="collection-image"
+                  src={result.urls.regular}
+                  alt={result.alt_description}
+                />
               </figure>
             )
           })
