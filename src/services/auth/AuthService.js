@@ -56,4 +56,12 @@ export default class AuthService {
     return (user) ? JSON.parse(user) : {}
   }
 
+  recover = async (email) => {
+    return await this.auth
+      .sendPasswordResetEmail(email)
+      .catch((error) => {
+        throw new Error(error)
+      })
+  }
+
 }

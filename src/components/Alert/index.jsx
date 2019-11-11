@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import {
   Columns, Column, Modal, ModalBackground, ModalContent, ModalClose,
   Card, CardContent, Content, CardImage
@@ -8,9 +8,29 @@ import Check from './Check'
 import Cross from './Cross'
 
 export default (props) => {
+  const [mounted, setMounted] = useState(false)
+  const { active, handleClose } = props
+
+  useEffect(() => {
+    setMounted(true)
+    const autoClose = () => {
+      if (active) {
+        setTimeout(() => {
+          handleClose()
+        }, 3000)
+      }
+    }
+    if (mounted) {
+      autoClose()
+    }
+    return () => {
+      setMounted(false)
+    }
+  }, [active, handleClose, mounted, setMounted])
+
   return (
-    <Modal className="modal-fx-3dSlit" isActive={props.active}>
-      <ModalBackground onClick={props.handleClose} />
+    <Modal className="modal-fx-3dSlit" isActive={active}>
+      <ModalBackground onClick={handleClose} />
       <ModalContent className="is-tiny">
         <Card>
           <CardImage>

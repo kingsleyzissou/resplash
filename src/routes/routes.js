@@ -2,6 +2,7 @@ import React from 'react'
 import Login from '../pages/Login'
 import Search from '../pages/Search'
 import Register from '../pages/Register'
+import Recover from '../pages/Recover'
 import Dashboard from '../pages/Dashboard'
 import Collection from '../pages/Collection'
 import { ApiContext } from '../services/api'
@@ -9,6 +10,7 @@ import { ApiContext } from '../services/api'
 let routes = [
   { name: 'login', exact: true, path: '/login', dashboard: false, type: 'guest', main: () => <Login /> },
   { name: 'register', exact: true, path: '/register', dashboard: false, type: 'guest', main: () => <Register /> },
+  { name: 'recover', exact: true, path: '/recover', dashboard: false, type: 'guest', main: () => <Recover /> },
   {
     name: 'collection', exact: false, path: '/collection/:id', dashboard: true, type: 'protected', main: () =>
       <ApiContext.Consumer>

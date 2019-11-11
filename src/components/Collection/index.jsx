@@ -16,6 +16,11 @@ export default (props) => {
   }
 
   const handleModal = (modal) => {
+    if (props.type === 'collection') collectionModal(modal)
+    else imageModal()
+  }
+
+  const collectionModal = (modal) => {
     const { id, name, subtitle, description } = props
     props.setData({ id, name, subtitle, description })
     if (modal === 'editModal')
@@ -24,21 +29,28 @@ export default (props) => {
       props.openDeleteModal()
   }
 
+  const imageModal = () => {
+    showAction()
+  }
+
   return (
-    <figure className="collection">
+    <div className="collection">
       <span className="caption">
         <h1 className="caption-title">{props.name}</h1>
         <p className="caption-subtitle">{props.subtitle}</p>
       </span>
       <div className="buttons">
-        <Button
-          isSize={'small'}
-          isColor={'link'}
-          className="collection-button"
-          onClick={() => handleModal('editModal')}
-        >
-          <FontAwesomeIcon icon={Edit} size="1x" />
-        </Button>
+        {
+          props.type === 'collection' &&
+          <Button
+            isSize={'small'}
+            isColor={'link'}
+            className="collection-button"
+            onClick={() => handleModal('editModal')}
+          >
+            <FontAwesomeIcon icon={Edit} size="1x" />
+          </Button>
+        }
         <Button
           isSize={'small'}
           isColor={'danger'}
@@ -53,7 +65,7 @@ export default (props) => {
       >
       </span>
       <img src={src} alt={alt} className="collection-image" />
-    </figure>
+    </div>
   )
 
 }

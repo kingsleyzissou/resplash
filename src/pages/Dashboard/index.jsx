@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import {
-  Container, Columns, Column, Button, Level,
+  Container, Button, Level,
   LevelLeft, LevelRight
 } from 'bloomer'
 import {
@@ -9,7 +9,7 @@ import {
 } from '../../components'
 import { AuthContext } from '../../services/auth'
 import { withRouter } from 'react-router-dom'
-
+import Masonry from 'react-masonry-css'
 
 class Dashboard extends Component {
 
@@ -144,16 +144,20 @@ class Dashboard extends Component {
                   </LevelRight>
                 </Level>
                 <hr />
-                <Columns isMultiline isCentered={false}>
+                <Masonry
+                  breakpointCols={3}
+                  className="my-masonry-grid"
+                  columnClassName="my-masonry-grid_column"
+                >
                   {
                     this.state.collections.map((collection, index) => {
                       return (
-                        <Column isSize={'1/3'} key={index}>
+                        <div key={index}>
                           <Collection
                             id={collection.id}
                             name={collection.name}
                             subtitle={collection.subtitle}
-                            src={collection.image}
+                            src={collection.images[0].urls.regular}
                             description={collection.description}
                             setData={this.setModalData}
                             showAction={this.showCollection}
@@ -161,11 +165,11 @@ class Dashboard extends Component {
                             openEditModal={() => this.toggleModal('editModal')}
                             openDeleteModal={() => this.toggleModal('deleteModal')}
                           />
-                        </Column>
+                        </div>
                       )
                     })
                   }
-                </Columns>
+                </Masonry>
               </Container>
             )
         }

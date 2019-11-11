@@ -61,6 +61,9 @@ class Image {
       .update({
         images: firebase.firestore.FieldValue.arrayRemove(image)
       })
+      .catch((error) => {
+        throw new Error(error)
+      })
   }
 
 }

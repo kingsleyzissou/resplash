@@ -1,15 +1,18 @@
 import React, { Component, Fragment } from 'react'
-import { Columns, Column, Level, LevelRight, LevelLeft, Button } from 'bloomer'
-import { Loader, Collection as CollectionComponent, Lightbox } from '../../components'
+import { Level, LevelRight, LevelLeft, Button } from 'bloomer'
+import { Loader, Collection as CollectionComponent, Lightbox, Alert } from '../../components'
 import { AuthContext } from '../../services/auth'
 import { withRouter } from 'react-router-dom'
 import lightboxInitState from '../../components/Lightbox/initState'
+import alertInitState from '../../components/Alert/initState'
+import Masonry from 'react-masonry-css'
 
 class Collection extends Component {
 
   constructor(props) {
     super(props)
     this._mounted = false
+    this.history = props.history
   }
 
   state = {
@@ -17,7 +20,8 @@ class Collection extends Component {
     user: {},
     collection: {},
     current: lightboxInitState,
-    lightbox: false
+    lightbox: false,
+    alert: alertInitState
   }
 
   componentDidMount = async () => {
@@ -44,7 +48,20 @@ class Collection extends Component {
     const collection = this.props.match.params.id
     const Image = this.props.api.getImageModel()
     Image.remove({ collection, image: this.state.current })
+      .catch(err => this.showAlert(false, err))
+    this.showAlert(true, 'Image successfully removed')
     this.getCollection()
+  }
+
+  showAlert = (success, message) => {
+    this.setState({
+      lightbox: false,
+      alert: {
+        active: true,
+        success: success,
+        message: message
+      }
+    })
   }
 
   showImage = ({ image }) => {
@@ -55,7 +72,6 @@ class Collection extends Component {
   }
 
   render() {
-
     const { current } = this.state
     return (
       <Fragment>
@@ -78,36 +94,45 @@ class Collection extends Component {
                   contextAction={this.removeImage}
                   handleClose={() => this.setState({ lightbox: false })}
                 />
+                <Alert
+                  active={this.state.alert.active}
+                  success={this.state.alert.success}
+                  message={this.state.alert.message}
+                  handleClose={() => this.setState({ alert: alertInitState })}
+                />
                 <Level>
                   <LevelLeft>
                     <h1 className="title">My Collections</h1>
                   </LevelLeft>
                   <LevelRight>
-                    <Button onClick={() => this.toggleModal('addModal')}>
-                      + Add Collection
+                    <Button onClick={() => this.history.push('/search')}>
+                      + Find Images
                     </Button>
                   </LevelRight>
                 </Level>
                 <hr />
-                <Columns>
+                <Masonry
+                  breakpointCols={3}
+                  className="my-masonry-grid"
+                  columnClassName="my-masonry-grid_column"
+                >
                   {
                     this.state.collection.images.map((image, index) => {
                       return (
-                        <Column isSize={'1/3'} key={index}>
-                          <CollectionComponent
-                            title={image.title}
-                            subtitle={image.subtitle}
-                            src={image.urls.regular}
-                            alt={image.alt_description}
-                            image={image}
-                            type={'image'}
-                            showAction={this.showImage}
-                          />
-                        </Column>
+                        <CollectionComponent
+                          key={index}
+                          title={image.title}
+                          subtitle={image.subtitle}
+                          src={image.urls.regular}
+                          alt={image.alt_description}
+                          image={image}
+                          type={'image'}
+                          showAction={this.showImage}
+                        />
                       )
                     })
                   }
-                </Columns>
+                </Masonry>
               </Fragment>
             )
         }

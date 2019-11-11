@@ -2,12 +2,14 @@ import Collection from './Collection'
 import Image from './Image'
 import Lightbox from './Lightbox'
 import Loader from './Loader'
-import LoginForm from './LoginForm'
 import Modal from './Modal'
 import Navbar from './Navbar'
 import Alert from './Alert'
-import RegisterForm from './RegisterForm'
 import PrettyPrintJson from './PrettyPrintJson'
+import {
+  LoginForm, RegisterForm,
+  RecoverForm, ResetForm
+} from './Auth'
 import {
   AddCollectionForm, EditCollectionForm,
   DeleteCollectionForm, SelectCollectionForm
@@ -18,5 +20,5 @@ export {
   AddCollectionForm, EditCollectionForm, DeleteCollectionForm,
   SelectCollectionForm, Collection, Image,
   Lightbox, Loader, LoginForm, Modal,
-  Navbar, Alert, RegisterForm, PrettyPrintJson
+  Navbar, Alert, RegisterForm, RecoverForm, ResetForm, PrettyPrintJson
 }

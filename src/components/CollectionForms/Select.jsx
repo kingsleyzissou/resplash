@@ -3,13 +3,11 @@ import useForm from 'react-hook-form'
 import { Field, Control, Button, Help } from 'bloomer'
 import { selectClasses } from '../../utils/formClasses'
 
-export default ({ collections, selectCollection, close }) => {
+const SelectForm = ({ collections, selectCollection, close }) => {
   const { register, handleSubmit, errors, reset } = useForm()
 
   const submitForm = (data) => {
     selectCollection(data)
-    clear()
-    close()
   }
 
   const cancel = () => {
@@ -66,3 +64,5 @@ export default ({ collections, selectCollection, close }) => {
     </Fragment>
   )
 }
+
+export default SelectForm

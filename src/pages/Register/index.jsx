@@ -1,21 +1,15 @@
 import React, { useContext } from 'react'
-import RegisterForm from '../../components/RegisterForm'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import { Container, Column, Box } from 'bloomer'
+import { RegisterForm } from '../../components'
+import { Container, Column } from 'bloomer'
 import { withRouter } from 'react-router-dom'
 import { AuthContext } from '../../services/auth'
 
-const Register = () => {
+const Register = ({ history }) => {
   const auth = useContext(AuthContext)
   return (
     <Container hasTextAlign="centered">
       <Column isSize={4} isOffset={4}>
-        <Box className="login-form" >
-          <FontAwesomeIcon icon={faCoffee} size="2x" style={{ color: '#fff' }} />
-          <h1 className="title">Register</h1>
-          <RegisterForm auth={auth} />
-        </Box>
+        <RegisterForm auth={auth} history={history} />
       </Column>
     </Container>
   )
