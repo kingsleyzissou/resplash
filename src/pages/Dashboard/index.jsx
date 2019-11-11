@@ -58,7 +58,7 @@ class Dashboard extends Component {
   addCollection = ({ name, subtitle, description }) => {
     const { uid } = this.state.user
     this.props.Collection.create({ uid, name, subtitle, description })
-    this.listCollections()
+    this.listCollections({ uid })
   }
 
   editCollection = (data) => {
