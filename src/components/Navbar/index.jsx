@@ -1,8 +1,10 @@
 import React, { Fragment, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCamera as Camera } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from '../../services/auth'
 import {
-  Container, HeroHeader, Image, Navbar as Nav, NavbarMenu, NavbarItem,
+  Container, HeroHeader, Navbar as Nav, NavbarMenu, NavbarItem,
   NavbarBurger, NavbarBrand, NavbarEnd, NavbarDropdown,
   NavbarDivider
 } from 'bloomer'
@@ -27,7 +29,7 @@ const Navbar = ({ history }) => {
           <Container>
             <NavbarBrand>
               <Link to="/" className="navbar-item">
-                <Image isSize="24x24" src="/logo.png" />
+                <FontAwesomeIcon icon={Camera} style={{ color: '#fff' }} />
                 &nbsp;&nbsp;
                 Resplash
                </Link>

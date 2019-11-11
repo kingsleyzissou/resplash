@@ -2,7 +2,7 @@
 import React, { Fragment, useState } from 'react'
 import useForm from 'react-hook-form'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee as Coffee } from "@fortawesome/free-solid-svg-icons";
+import { faCamera as Camera } from "@fortawesome/free-solid-svg-icons";
 import { Field, Control, Help, Notification, Delete, Button, Box } from 'bloomer'
 import { inputClasses } from '../../utils/formClasses'
 
@@ -30,7 +30,7 @@ const RecoverForm = ({ auth, history }) => {
   return (
     <Fragment>
       <Box className="login-form" >
-        <FontAwesomeIcon icon={Coffee} size="2x" style={{ color: '#fff' }} />
+        <FontAwesomeIcon icon={Camera} size="2x" style={{ color: '#fff' }} />
         <h1 className="title">Recover</h1>
 
         {errs.message &&
