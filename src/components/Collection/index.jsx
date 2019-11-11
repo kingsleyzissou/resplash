@@ -11,7 +11,6 @@ export default (props) => {
   const showAction = () => {
     const { id, image } = props
     let ref = (props.type === 'collection') ? { id } : { image };
-    console.log(ref)
     props.showAction(ref)
   }
 

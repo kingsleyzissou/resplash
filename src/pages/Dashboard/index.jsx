@@ -58,7 +58,6 @@ class Dashboard extends Component {
   addCollection = ({ name, subtitle, description }) => {
     const { uid } = this.state.user
     this.props.Collection.create({ uid, name, subtitle, description })
-      .catch(err => console.log(err))
     this.listCollections()
   }
 
@@ -157,13 +156,16 @@ class Dashboard extends Component {
                 >
                   {
                     this.state.collections.map((collection, index) => {
+                      let image = (collection.images && collection.images.length > 0)
+                        ? collection.images[0].urls.regular
+                        : '/placeholder.jpg';
                       return (
                         <div key={index}>
                           <Collection
                             id={collection.id}
                             name={collection.name}
                             subtitle={collection.subtitle}
-                            src={collection.images[0].urls.regular}
+                            src={image}
                             description={collection.description}
                             setData={this.setModalData}
                             showAction={this.showCollection}

@@ -112,7 +112,9 @@ class Collection extends Component {
                 </Level>
                 <hr />
                 {
-                  this.state.collection.images.length === 0 &&
+                  (!this.state.collection ||
+                    !this.state.collection.images ||
+                    this.state.collection.images.length === 0) &&
                   <h1 className="has-text-centered">
                     This collection doesn't have any images.
                     To add images, use the search feature.
@@ -124,6 +126,8 @@ class Collection extends Component {
                   columnClassName="my-masonry-grid_column"
                 >
                   {
+                    this.state.collection &&
+                    this.state.collection.images &&
                     this.state.collection.images.map((image, index) => {
                       return (
                         <CollectionComponent
