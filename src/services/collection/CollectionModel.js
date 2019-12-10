@@ -1,60 +1,38 @@
-import { db } from '../../firebase'
+import ApolloClient from '../../apollo';
+import queries from './queries';
+import mutations from './mutations';
 
-class Collection {
+export default class Collection {
 
-  create = ({ uid, name, subtitle, description }) => {
-    db.collection('collections').add({
-      user: `users/${uid}`,
-      name,
-      subtitle,
-      description
-    })
-  }
-
-  index = async ({ uid }) => {
-    const snapshot = await db.collection('collections')
-      .where('user', '==', `users/${uid}`)
-      .get()
-      .catch((error) => {
-        throw new Error(error)
-      })
-    return snapshot.docs.map(doc => {
-      return {
-        id: doc.id,
-        ...doc.data()
-      }
-    });
-  }
-
-  show = async ({ id }) => {
-    const ref = db.collection('collections').doc(id)
-    const snapshot = await ref
-      .get()
-      .catch((error) => {
-        throw new Error(error)
-      })
-    return {
-      id: snapshot.id,
-      ...snapshot.data()
+  create = async ({ user, name, subtitle, description }) => {
+    const collection = {
+      user: user._id, name, subtitle, description, comments: [], images: [], likes: 0
     }
+    let { data } = await ApolloClient
+      .mutate({
+        mutation: mutations.ADD_COLLECTION,
+        variables: {
+          collection
+        }
+      })
+    return data
   }
 
-  update = async (data) => {
-    return await db.collection('collections')
-      .doc(data.id).update(data)
-      .catch((error) => {
-        throw new Error(error)
+  index = async () => {
+    let { data } = await ApolloClient
+      .query({
+        query: queries.GET_COLLECTIONS,
       })
+    return data
   }
 
-  delete = async ({ id }) => {
-    return await db.collection('collections')
-      .doc(id).delete()
-      .catch((error) => {
-        throw new Error(error)
+  show = async ({ _id }) => {
+    let { data } = await ApolloClient
+      .query({
+        query: queries.GET_COLLECTION,
+        variables: { _id }
       })
+    return data
   }
 
 }
-
-export default Collection

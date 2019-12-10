@@ -45,9 +45,11 @@ class Dashboard extends Component {
     this._mounted = false
   }
 
-  listCollections = async ({ uid }) => {
-    let collections = await this.props.Collection.index({ uid })
-      .catch((err) => console.log(err))
+  listCollections = async ({ _id }) => {
+    // let collections = await this.props.Collection.index({ uid })
+    //   .catch((err) => console.log(err))
+    let { collections } = await this.props.Collection.index({ _id })
+      .catch((err) => console.log(err));
     this._mounted && this.setState({ collections })
   }
 
@@ -56,9 +58,9 @@ class Dashboard extends Component {
   }
 
   addCollection = ({ name, subtitle, description }) => {
-    const { uid } = this.state.user
-    this.props.Collection.create({ uid, name, subtitle, description })
-    this.listCollections({ uid })
+    const user = this.state.user
+    this.props.Collection.create({ user, name, subtitle, description })
+    this.listCollections(user)
   }
 
   editCollection = (data) => {
@@ -162,7 +164,7 @@ class Dashboard extends Component {
                       return (
                         <div key={index}>
                           <Collection
-                            id={collection.id}
+                            id={collection._id}
                             name={collection.name}
                             subtitle={collection.subtitle}
                             src={image}

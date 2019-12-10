@@ -15,7 +15,7 @@ let routes = [
   { name: 'register', exact: true, path: '/register', dashboard: false, type: 'guest', main: () => <Register /> },
   { name: 'recover', exact: true, path: '/recover', dashboard: false, type: 'guest', main: () => <Recover /> },
   {
-    name: 'collection', exact: false, path: '/collection/:id', dashboard: true, type: 'protected', main: () =>
+    name: 'collection', exact: false, path: '/collection/:_id', dashboard: true, type: 'protected', main: () =>
       <ApiContext.Consumer>
         {api =>
           <Collection api={api} />

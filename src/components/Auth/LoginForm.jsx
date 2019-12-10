@@ -3,7 +3,7 @@ import React, { Fragment, useState } from 'react'
 import useForm from 'react-hook-form'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera as Camera } from "@fortawesome/free-solid-svg-icons";
-import { Field, Control, Help, Notification, Delete, Button, Image, Box } from 'bloomer'
+import { Field, Control, Help, Notification, Delete, Button, Box } from 'bloomer'
 import { inputClasses } from '../../utils/formClasses'
 import { Link } from 'react-router-dom'
 
@@ -18,25 +18,38 @@ const LoginForm = ({ auth, history }) => {
     setErrs(error)
   }
 
-  const login = ({ email, password }) => {
+  const login = async ({ email, password }) => {
     setLoading(true)
-    auth.login(email, password)
-      .then(() => history.push('/dashboard'))
+    await auth.login(email, password)
       .catch(({ message }) => {
         setErrs({ message })
         setLoading(false)
       })
+    history.push('/dashboard')
+    // let { data } = await axios.post('http://localhost:4000/login', { email, password })
+    // .then(() => history.push('/dashboard'))
+    // .catch(({ message }) => {
+    //   setErrs({ message })
+    //   setLoading(false)
+    // })
+
+    // auth.login(email, password)
+    //   .then(() => history.push('/dashboard'))
+    //   .catch(({ message }) => {
+    //     setErrs({ message })
+    //     setLoading(false)
+    //   })
   }
 
-  const googleLogin = () => {
-    setLoading(true)
-    auth.googleLogin()
-      .then(() => history.push('/dashboard'))
-      .catch(({ message }) => {
-        setErrs({ message })
-        setLoading(false)
-      })
-  }
+  // const googleLogin = () => {
+  //   setLoading(true)
+  //   auth.googleLogin()
+  //     .then(() => history.push('/dashboard'))
+  //     .catch(({ message }) => {
+  //       setErrs({ message })
+  //       setLoading(false)
+  //     })
+  // }
 
   return (
     <Fragment>
@@ -94,7 +107,7 @@ const LoginForm = ({ auth, history }) => {
         >
           Login
         </Button>
-        <hr />
+        {/* <hr />
         <p className="has-text-white" style={{ marginBottom: 1 + 'em' }}>Or Login with</p>
         <Button onClick={googleLogin}>
           <Image
@@ -102,7 +115,7 @@ const LoginForm = ({ auth, history }) => {
             src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
           />
           &nbsp;&nbsp;Google
-        </Button>
+        </Button> */}
       </Box>
       <p>
         <Link to="/recover">Forgot password?</Link>

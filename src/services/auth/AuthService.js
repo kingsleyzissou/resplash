@@ -1,29 +1,32 @@
-import firebase, { config } from '../../firebase'
-import { readSession, clearSession } from '../../utils/session'
+import axios from 'axios'
+// import firebase, { config } from '../../firebase'
+// import { readSession, clearSession } from '../../utils/session'
 
 export default class AuthService {
 
-  constructor(User) {
-    this.User = User
-    this.auth = firebase.auth()
-    this.auth.setPersistence(
-      firebase.auth.Auth.Persistence.SESSION
-    )
-    this.provider = new firebase.auth.GoogleAuthProvider()
-  }
+  // constructor(User) {
+  // this.User = User
+  // this.auth = firebase.auth()
+  // this.auth.setPersistence(
+  //   firebase.auth.Auth.Persistence.SESSION
+  // )
+  // this.provider = new firebase.auth.GoogleAuthProvider()
+  // }
 
   login = async (email, password) => {
-    let { user } = await this.auth
-      .signInWithEmailAndPassword(email, password)
+    let { data } = await axios
+      .post('http://localhost:4000/login', { email, password })
       .catch((error) => {
         throw new Error(error)
       })
-    return user
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('user', JSON.stringify(data.user));
+    return data.user
   }
 
   logout = async () => {
-    this.auth.signOut()
-    clearSession(config)
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
   }
 
   googleLogin = async () => {
@@ -37,13 +40,15 @@ export default class AuthService {
   }
 
   register = async (email, password) => {
-    let { user } = await this.auth
-      .createUserWithEmailAndPassword(email, password)
+    let { data } = await axios
+      .post('http://localhost:4000/register', { email, password })
       .catch((error) => {
         throw new Error(error)
       })
-    this.User.create(user)
-    return user
+    // this.User.create(user)
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('user', data.user);
+    return data.user
   }
 
   authenticated = () => {
@@ -52,16 +57,16 @@ export default class AuthService {
   }
 
   getCurrentUser = () => {
-    const user = readSession(config)
-    return (user) ? JSON.parse(user) : {}
+    const authenticated = localStorage.getItem('token')
+    return (authenticated) ? JSON.parse(localStorage.getItem('user')) : {}
   }
 
-  recover = async (email) => {
-    return await this.auth
-      .sendPasswordResetEmail(email)
-      .catch((error) => {
-        throw new Error(error)
-      })
-  }
+  // recover = async (email) => {
+  //   return await this.auth
+  //     .sendPasswordResetEmail(email)
+  //     .catch((error) => {
+  //       throw new Error(error)
+  //     })
+  // }
 
 }

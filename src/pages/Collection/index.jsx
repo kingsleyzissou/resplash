@@ -37,9 +37,9 @@ class Collection extends Component {
   }
 
   getCollection = async () => {
-    const { id } = this.props.match.params
+    const { _id } = this.props.match.params
     const Collection = this.props.api.getCollectionModel()
-    const collection = await Collection.show({ id })
+    const collection = await Collection.show({ _id })
       .catch((err) => console.log(err))
     this._mounted && this.setState({ collection })
   }
