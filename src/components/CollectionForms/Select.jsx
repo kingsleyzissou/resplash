@@ -43,7 +43,7 @@ const SelectForm = ({ collections, selectCollection, close }) => {
               && collections.map((collection, index) => {
                 return <option
                   key={index}
-                  value={collection.id}
+                  value={collection._id}
                 >
                   {collection.name}
                 </option>

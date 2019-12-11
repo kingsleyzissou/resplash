@@ -39,15 +39,15 @@ class Collection extends Component {
   getCollection = async () => {
     const { _id } = this.props.match.params
     const Collection = this.props.api.getCollectionModel()
-    const collection = await Collection.show({ _id })
+    const { collection } = await Collection.show({ _id })
       .catch((err) => console.log(err))
     this._mounted && this.setState({ collection })
   }
 
   removeImage = () => {
-    const collection = this.props.match.params.id
-    const Image = this.props.api.getImageModel()
-    Image.remove({ collection, image: this.state.current })
+    const _id = this.props.match.params._id
+    const Collection = this.props.api.getCollectionModel()
+    Collection.removeImage({ _id, image: this.state.current })
       .catch(err => this.showAlert(false, err))
     this.showAlert(true, 'Image successfully removed')
     this.getCollection()

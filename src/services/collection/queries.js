@@ -6,6 +6,23 @@ export default {
     collection(_id: $_id) {
       _id
       name
+      images {
+        _id
+        description
+        alt_description
+        likes
+        urls {
+          regular
+          full
+        }
+        user {
+          name
+          username
+          profile_image {
+            medium
+          }
+        }
+      }
     }
   }
 `,

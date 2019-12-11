@@ -8,8 +8,8 @@ export default ({ addCollection, close }) => {
 
   const submitForm = (data) => {
     addCollection(data)
-    // clear()
-    // close()
+    clear()
+    close()
   }
 
   const cancel = () => {

@@ -39,8 +39,8 @@ const Search = () => {
   }
 
   const selectCollection = ({ collection }) => {
-    const Image = api.getImageModel()
-    Image.add({ collection, image: current })
+    const Collection = api.getCollectionModel()
+    Collection.addImage({ _id: collection, image: current })
       .catch(err => showAlert(false, err))
     showAlert(true, 'Image successfully added!')
   }
