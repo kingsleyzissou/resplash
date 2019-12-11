@@ -8,7 +8,7 @@ const Login = ({ history }) => {
   const auth = useContext(AuthContext)
   return (
     <Container hasTextAlign="centered">
-      <Column isSize={4} isOffset={4}>
+      <Column isSize={6} isOffset={3}>
         <LoginForm auth={auth} history={history} />
       </Column>
     </Container>

@@ -25,7 +25,7 @@ class Dashboard extends Component {
     editModal: false,
     deleteModal: false,
     modalData: {
-      id: '',
+      _id: '',
       name: '',
       subtitle: '',
       description: ''
@@ -46,15 +46,13 @@ class Dashboard extends Component {
   }
 
   listCollections = async ({ _id }) => {
-    // let collections = await this.props.Collection.index({ uid })
-    //   .catch((err) => console.log(err))
     let { collections } = await this.props.Collection.index({ _id })
       .catch((err) => console.log(err));
     this._mounted && this.setState({ collections })
   }
 
-  showCollection = ({ id }) => {
-    this.props.history.push(`collection/${id}`)
+  showCollection = ({ _id }) => {
+    this.props.history.push(`collection/${_id}`)
   }
 
   addCollection = ({ name, subtitle, description }) => {
@@ -64,15 +62,13 @@ class Dashboard extends Component {
   }
 
   editCollection = (data) => {
-    const { uid } = this.state.user
-    data.user = `users/${uid}`
     this.props.Collection.update(data)
       .catch(err => console.log(err))
     this.listCollections(this.state.user)
   }
 
-  deleteCollection = ({ id }) => {
-    this.props.Collection.delete({ id })
+  deleteCollection = ({ _id }) => {
+    this.props.Collection.delete({ _id })
       .catch(err => console.log(err))
     this.listCollections(this.state.user)
   }
@@ -82,8 +78,8 @@ class Dashboard extends Component {
       this.setState({ [modal]: !this.state[modal] })
   }
 
-  setModalData = ({ id, name, subtitle, description }) => {
-    const update = { modalData: { id, name, subtitle, description } }
+  setModalData = ({ _id, name, subtitle, description }) => {
+    const update = { modalData: { _id, name, subtitle, description } }
     this._mounted &&
       this.setState(update)
   }
@@ -128,7 +124,7 @@ class Dashboard extends Component {
                   handleClose={() => this.toggleModal('deleteModal')}
                   Component={() => {
                     return <DeleteCollectionForm
-                      id={this.state.modalData.id}
+                      _id={this.state.modalData._id}
                       deleteCollection={this.deleteCollection}
                       close={() => this.toggleModal('deleteModal')}
                     />
@@ -164,7 +160,7 @@ class Dashboard extends Component {
                       return (
                         <div key={index}>
                           <Collection
-                            id={collection._id}
+                            _id={collection._id}
                             name={collection.name}
                             subtitle={collection.subtitle}
                             src={image}

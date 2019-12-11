@@ -20,8 +20,8 @@ export default (props) => {
   }
 
   const collectionModal = (modal) => {
-    const { id, name, subtitle, description } = props
-    props.setData({ id, name, subtitle, description })
+    const { _id, name, subtitle, description } = props
+    props.setData({ _id, name, subtitle, description })
     if (modal === 'editModal')
       props.openEditModal()
     if (modal === 'deleteModal')

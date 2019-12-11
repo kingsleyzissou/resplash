@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
-import axios from './axios'
+import $axios from './axios'
 
 
 const useSearch = (page, setLoading) => {
@@ -10,7 +10,7 @@ const useSearch = (page, setLoading) => {
     let query = q.current.value
     if (!query || query === '') return
     setLoading(true)
-    const { data } = await axios.get('/', {
+    const { data } = await $axios.unsplash.get('/', {
       params: {
         query, page
       }

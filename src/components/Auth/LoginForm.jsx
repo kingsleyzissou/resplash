@@ -18,27 +18,15 @@ const LoginForm = ({ auth, history }) => {
     setErrs(error)
   }
 
-  const login = async ({ email, password }) => {
+  const login = async (input) => {
     setLoading(true)
-    await auth.login(email, password)
+    await auth.login(input)
+      .then(() => history.push('/dashboard'))
       .catch(({ message }) => {
+        console.log(message)
         setErrs({ message })
         setLoading(false)
       })
-    history.push('/dashboard')
-    // let { data } = await axios.post('http://localhost:4000/login', { email, password })
-    // .then(() => history.push('/dashboard'))
-    // .catch(({ message }) => {
-    //   setErrs({ message })
-    //   setLoading(false)
-    // })
-
-    // auth.login(email, password)
-    //   .then(() => history.push('/dashboard'))
-    //   .catch(({ message }) => {
-    //     setErrs({ message })
-    //     setLoading(false)
-    //   })
   }
 
   // const googleLogin = () => {

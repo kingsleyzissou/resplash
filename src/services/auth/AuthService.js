@@ -1,24 +1,10 @@
-import axios from 'axios'
-// import firebase, { config } from '../../firebase'
-// import { readSession, clearSession } from '../../utils/session'
+import $axios from '../../utils/axios'
 
 export default class AuthService {
 
-  // constructor(User) {
-  // this.User = User
-  // this.auth = firebase.auth()
-  // this.auth.setPersistence(
-  //   firebase.auth.Auth.Persistence.SESSION
-  // )
-  // this.provider = new firebase.auth.GoogleAuthProvider()
-  // }
-
-  login = async (email, password) => {
-    let { data } = await axios
-      .post('http://localhost:4000/login', { email, password })
-      .catch((error) => {
-        throw new Error(error)
-      })
+  login = async (input) => {
+    let { data } = await $axios.server
+      .post('/login', { ...input })
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(data.user));
     return data.user
@@ -39,26 +25,21 @@ export default class AuthService {
     return user
   }
 
-  register = async (email, password) => {
-    let { data } = await axios
-      .post('http://localhost:4000/register', { email, password })
-      .catch((error) => {
-        throw new Error(error)
-      })
-    // this.User.create(user)
+  register = async (input) => {
+    let { data } = await $axios.server
+      .post('/register', { ...input })
     localStorage.setItem('token', data.token);
-    localStorage.setItem('user', data.user);
+    localStorage.setItem('user', JSON.stringify(data.user));
     return data.user
   }
 
   authenticated = () => {
-    const user = this.getCurrentUser()
-    return !(Object.keys(user).length === 0)
+    const token = localStorage.getItem('token')
+    return (token)
   }
 
   getCurrentUser = () => {
-    const authenticated = localStorage.getItem('token')
-    return (authenticated) ? JSON.parse(localStorage.getItem('user')) : {}
+    return (this.authenticated) ? JSON.parse(localStorage.getItem('user')) : {}
   }
 
   // recover = async (email) => {

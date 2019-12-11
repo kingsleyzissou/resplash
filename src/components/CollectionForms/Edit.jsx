@@ -4,11 +4,11 @@ import { Field, Control, Button, Help } from 'bloomer'
 import { inputClasses, textareaClasses } from '../../utils/formClasses'
 
 export default ({ data, editCollection, close }) => {
-  const { id, name, subtitle, description } = data
+  const { _id, name, subtitle, description } = data
   const { register, handleSubmit, errors, reset } = useForm()
 
   const submitForm = (data) => {
-    data.id = id
+    data._id = _id
     editCollection(data)
     clear()
     close()

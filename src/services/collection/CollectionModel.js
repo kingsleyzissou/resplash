@@ -18,6 +18,20 @@ export default class Collection {
     return data
   }
 
+  update = async ({ _id, name, subtitle, description }) => {
+    const collection = {
+      name, subtitle, description
+    }
+    let { data } = await ApolloClient
+      .mutate({
+        mutation: mutations.UPDATE_COLLECTION,
+        variables: {
+          _id, collection
+        }
+      })
+    return data
+  }
+
   addImage = async ({ _id, image }) => {
     let { data } = await ApolloClient
       .mutate({
@@ -44,6 +58,7 @@ export default class Collection {
     let { data } = await ApolloClient
       .query({
         query: queries.GET_COLLECTIONS,
+        fetchPolicy: 'network-only'
       })
     return data
   }
