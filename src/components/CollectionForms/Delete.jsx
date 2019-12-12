@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
 import { Field, Button } from 'bloomer'
 
-export default ({ id, deleteCollection, close }) => {
+export default ({ _id, deleteCollection, close }) => {
 
   const handleSubmit = () => {
-    deleteCollection({ id })
+    deleteCollection({ _id })
     close()
   }
 

@@ -1,10 +1,12 @@
 import ApiContext from './ApiContext'
+import { UserModel, CollectionModel, ImageModel, CommentModel } from '../models'
 
 class Api {
-  constructor(User, Collection, Image) {
-    this.User = User
-    this.Collection = Collection
-    this.Image = Image
+  constructor() {
+    this.User = new UserModel()
+    this.Collection = new CollectionModel()
+    this.Image = new ImageModel()
+    this.Comment = new CommentModel()
   }
 
   getUserModel = () => {
@@ -17,6 +19,10 @@ class Api {
 
   getImageModel = () => {
     return this.Image
+  }
+
+  getCommentModel = () => {
+    return this.Comment
   }
 
 }

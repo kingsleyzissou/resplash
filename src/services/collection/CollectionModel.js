@@ -32,6 +32,17 @@ export default class Collection {
     return data
   }
 
+  delete = async ({ _id }) => {
+    let { data } = await ApolloClient
+      .mutate({
+        mutation: mutations.DELETE_COLLECTION,
+        variables: {
+          _id
+        }
+      })
+    return data
+  }
+
   addImage = async ({ _id, image }) => {
     let { data } = await ApolloClient
       .mutate({

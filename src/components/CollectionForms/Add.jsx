@@ -65,7 +65,7 @@ export default ({ addCollection, close }) => {
       <Field>
         <Control>
           <textarea
-            className={textareaClasses('name', errors)}
+            className={textareaClasses('description', errors)}
             name="description"
             placeholder="Description"
             ref={register({

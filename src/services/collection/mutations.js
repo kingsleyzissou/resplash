@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 export default {
   ADD_COLLECTION: gql`
     mutation addCollection($collection: CollectionAdd) {
-      addCollection(collection: $collection) {
+      addCollection(input: $collection) {
         _id
         name
         subtitle
@@ -22,9 +22,11 @@ export default {
       }
     }
   `,
-  REMOVE_COLLECTION: gql`
-    mutation removeCollection($_id: String) {
-      removeCollection(collection: $collection)
+  DELETE_COLLECTION: gql`
+    mutation deleteCollection($_id: String) {
+      deleteCollection(_id: $_id) {
+        _id
+      }
     }
   `,
   ADD_IMAGE: gql`

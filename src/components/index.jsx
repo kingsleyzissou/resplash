@@ -6,6 +6,8 @@ import Modal from './Modal'
 import Navbar from './Navbar'
 import Alert from './Alert'
 import PrettyPrintJson from './PrettyPrintJson'
+import Comment from './Comment'
+import CommentForm from './CommentForm'
 import {
   LoginForm, RegisterForm,
   RecoverForm
@@ -20,5 +22,6 @@ export {
   AddCollectionForm, EditCollectionForm, DeleteCollectionForm,
   SelectCollectionForm, Collection, Image,
   Lightbox, Loader, LoginForm, Modal,
-  Navbar, Alert, RegisterForm, RecoverForm, PrettyPrintJson
+  Navbar, Alert, RegisterForm, RecoverForm, PrettyPrintJson,
+  Comment, CommentForm
 }

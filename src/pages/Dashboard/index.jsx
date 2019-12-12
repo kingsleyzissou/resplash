@@ -55,6 +55,10 @@ class Dashboard extends Component {
     this.props.history.push(`collection/${_id}`)
   }
 
+  likeCollection = () => {
+    console.log('hello');
+  }
+
   addCollection = ({ name, subtitle, description }) => {
     const user = this.state.user
     this.props.Collection.create({ user, name, subtitle, description })
@@ -164,6 +168,7 @@ class Dashboard extends Component {
                             name={collection.name}
                             subtitle={collection.subtitle}
                             src={image}
+                            like={this.likeCollection}
                             description={collection.description}
                             setData={this.setModalData}
                             showAction={this.showCollection}

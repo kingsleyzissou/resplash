@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Level, LevelRight, LevelLeft, Button } from 'bloomer'
-import { Loader, Collection as CollectionComponent, Lightbox, Alert } from '../../components'
+import { Loader, Collection as CollectionComponent, Lightbox, Alert, Comment, CommentForm } from '../../components'
 import { AuthContext } from '../../services/auth'
 import { withRouter } from 'react-router-dom'
 import lightboxInitState from '../../components/Lightbox/initState'
@@ -16,6 +16,7 @@ class Collection extends Component {
   }
 
   state = {
+    _id: '',
     loading: true,
     user: {},
     collection: {},
@@ -26,6 +27,7 @@ class Collection extends Component {
 
   componentDidMount = async () => {
     this._mounted = true
+    this.setState({ _id: this.props.match.params._id })
     const user = this.context.getCurrentUser()
     this._mounted && this.setState({ user })
     await this.getCollection()
@@ -45,7 +47,7 @@ class Collection extends Component {
   }
 
   removeImage = () => {
-    const _id = this.props.match.params._id
+    const { _id } = this.props.match.params
     const Collection = this.props.api.getCollectionModel()
     Collection.removeImage({ _id, image: this.state.current })
       .catch(err => this.showAlert(false, err))
@@ -69,6 +71,23 @@ class Collection extends Component {
       current: image,
       lightbox: true
     })
+  }
+
+  getComments = async () => {
+    const { _id } = this.props.match.params
+    const Comment = this.props.api.getCommentModel()
+    const comments = await Comment.index({ collectionId: _id })
+      .catch(err => this.showAlert(false, err))
+    console.log(comments)
+  }
+
+  addComment = async (comment, type) => {
+    const { _id } = this.props.match.params
+    const Comment = this.props.api.getCommentModel()
+    await Comment.add({ typeId: _id, type, comment })
+      .catch(err => this.showAlert(false, err))
+    this.showAlert(true, 'Comment added')
+    this.getComments()
   }
 
   render() {
@@ -115,10 +134,13 @@ class Collection extends Component {
                   (!this.state.collection ||
                     !this.state.collection.images ||
                     this.state.collection.images.length === 0) &&
-                  <h1 className="has-text-centered">
-                    This collection doesn't have any images.
-                    To add images, use the search feature.
-                  </h1>
+                  <Fragment>
+                    <h1 className="has-text-centered">
+                      This collection doesn't have any images.
+                      To add images, use the search feature.
+                    </h1>
+                    <div style={{ marginBottom: '10em' }}></div>
+                  </Fragment>
                 }
                 <Masonry
                   breakpointCols={3}
@@ -147,6 +169,16 @@ class Collection extends Component {
               </Fragment>
             )
         }
+        <h1 className="title">Comments</h1>
+        <hr />
+        {
+          this.state.collection.comments &&
+          this.state.collection.comments.length > 0 &&
+          this.state.collection.comments.map((comment, index) => {
+            return <Comment comment={comment} key={index} />
+          })
+        }
+        <CommentForm _id={this.state._id} type="collection" addComment={this.addComment} />
       </Fragment>
     )
 

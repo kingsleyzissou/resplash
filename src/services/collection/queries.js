@@ -23,6 +23,15 @@ export default {
             }
           }
         }
+        comments {
+          type
+          message
+          created_at
+          user {
+            name
+            username
+          }
+        }
       }
     }
 `,
