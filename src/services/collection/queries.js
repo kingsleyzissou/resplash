@@ -10,7 +10,6 @@ export default {
           _id
           description
           alt_description
-          likes
           urls {
             regular
             full
@@ -24,12 +23,23 @@ export default {
           }
         }
         comments {
+          _id
           type
           message
           created_at
           user {
             name
             username
+          }
+          comments {
+            _id
+            type
+            message
+            created_at
+            user {
+              name
+              username
+            }
           }
         }
       }

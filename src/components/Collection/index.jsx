@@ -2,7 +2,7 @@ import React from 'react';
 import './Collection.scss';
 import { Button } from 'bloomer'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as Heart, faEdit as Edit, faTrash as Trash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit as Edit, faTrash as Trash } from "@fortawesome/free-solid-svg-icons";
 
 export default (props) => {
   let src = (props.src) ? props.src : '/placeholder.jpg'
@@ -12,10 +12,6 @@ export default (props) => {
     const { _id, image } = props
     let ref = (props.type === 'collection') ? { _id } : { image };
     props.showAction(ref)
-  }
-
-  const like = () => {
-    props.like()
   }
 
   const handleModal = (modal) => {
@@ -43,14 +39,6 @@ export default (props) => {
         <p className="caption-subtitle">{props.subtitle}</p>
       </span>
       <div className="buttons">
-        <Button
-          isSize={'small'}
-          isColor={'danger'}
-          className="collection-button"
-          onClick={like}
-        >
-          <FontAwesomeIcon icon={Heart} size="1x" />
-        </Button>
         {
           props.type === 'collection' &&
           <Button

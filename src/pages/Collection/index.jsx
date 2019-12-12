@@ -20,6 +20,7 @@ class Collection extends Component {
     loading: true,
     user: {},
     collection: {},
+    comments: {},
     current: lightboxInitState,
     lightbox: false,
     alert: alertInitState
@@ -44,6 +45,7 @@ class Collection extends Component {
     const { collection } = await Collection.show({ _id })
       .catch((err) => console.log(err))
     this._mounted && this.setState({ collection })
+    this._mounted && this.setState({ comments: collection.comments })
   }
 
   removeImage = () => {
@@ -76,9 +78,9 @@ class Collection extends Component {
   getComments = async () => {
     const { _id } = this.props.match.params
     const Comment = this.props.api.getCommentModel()
-    const comments = await Comment.index({ collectionId: _id })
+    const comments = await Comment.index({ typeId: _id, type: 'collection' })
       .catch(err => this.showAlert(false, err))
-    console.log(comments)
+    this.setState({ comments: comments.comments });
   }
 
   addComment = async (comment, type) => {
@@ -86,7 +88,7 @@ class Collection extends Component {
     const Comment = this.props.api.getCommentModel()
     await Comment.add({ typeId: _id, type, comment })
       .catch(err => this.showAlert(false, err))
-    this.showAlert(true, 'Comment added')
+    // this.showAlert(true, 'Comment added')
     this.getComments()
   }
 
@@ -172,13 +174,13 @@ class Collection extends Component {
         <h1 className="title">Comments</h1>
         <hr />
         {
-          this.state.collection.comments &&
-          this.state.collection.comments.length > 0 &&
-          this.state.collection.comments.map((comment, index) => {
+          this.state.comments &&
+          this.state.comments.length > 0 &&
+          this.state.comments.map((comment, index) => {
             return <Comment comment={comment} key={index} />
           })
         }
-        <CommentForm _id={this.state._id} type="collection" addComment={this.addComment} />
+        <CommentForm _id={this.state._id} type="collection" addComment={this.addComment} cancel={() => { }} />
       </Fragment>
     )
 

@@ -6,7 +6,7 @@ export default class Collection {
 
   create = async ({ user, name, subtitle, description }) => {
     const collection = {
-      user: user._id, name, subtitle, description, comments: [], images: [], likes: 0
+      user: user._id, name, subtitle, description
     }
     let { data } = await ApolloClient
       .mutate({
@@ -78,7 +78,8 @@ export default class Collection {
     let { data } = await ApolloClient
       .query({
         query: queries.GET_COLLECTION,
-        variables: { _id }
+        variables: { _id },
+        fetchPolicy: 'network-only'
       })
     return data
   }
