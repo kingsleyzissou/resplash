@@ -74,6 +74,15 @@ export default class Collection {
     return data
   }
 
+  userCollections = async () => {
+    let { data } = await ApolloClient
+      .query({
+        query: queries.GET_USER_COLLECTIONS,
+        fetchPolicy: 'network-only'
+      })
+    return data
+  }
+
   show = async ({ _id }) => {
     let { data } = await ApolloClient
       .query({

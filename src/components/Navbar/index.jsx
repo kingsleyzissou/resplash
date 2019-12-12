@@ -49,6 +49,7 @@ const Navbar = ({ history }) => {
                   authenticated &&
                   <Fragment>
                     <Link to="/dashboard" className="navbar-item">Dashboard</Link>
+                    <Link to="/collections" className="navbar-item">All Collections</Link>
                     <Link to="/search" className="navbar-item">Search</Link>
                     <NavbarItem hasDropdown isHoverable>
                       <NavbarItem href="#" className="navbar-link">

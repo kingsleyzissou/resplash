@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Collection.scss';
 import { Button } from 'bloomer'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit as Edit, faTrash as Trash } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from '../../services/auth';
 
 export default (props) => {
+  let Auth = useContext(AuthContext)
+  let user = Auth.getCurrentUser()
   let src = (props.src) ? props.src : '/placeholder.jpg'
   let alt = (props.alt) ? props.alt : 'Placeholder'
 
@@ -32,33 +35,38 @@ export default (props) => {
     showAction()
   }
 
+  console.log(props.user)
+
   return (
     <div className="collection">
       <span className="caption">
         <h1 className="caption-title">{props.name}</h1>
-        <p className="caption-subtitle">{props.subtitle}</p>
+        <p className="caption-subtitle">@{props.user.username}</p>
       </span>
-      <div className="buttons">
-        {
-          props.type === 'collection' &&
+      {
+        (user._id === props.user._id) &&
+        <div className="buttons">
+          {
+            props.type === 'collection' &&
+            <Button
+              isSize={'small'}
+              isColor={'link'}
+              className="collection-button"
+              onClick={() => handleModal('editModal')}
+            >
+              <FontAwesomeIcon icon={Edit} size="1x" />
+            </Button>
+          }
           <Button
             isSize={'small'}
-            isColor={'link'}
+            isColor={'danger'}
             className="collection-button"
-            onClick={() => handleModal('editModal')}
+            onClick={() => handleModal('deleteModal')}
           >
-            <FontAwesomeIcon icon={Edit} size="1x" />
+            <FontAwesomeIcon icon={Trash} size="1x" />
           </Button>
-        }
-        <Button
-          isSize={'small'}
-          isColor={'danger'}
-          className="collection-button"
-          onClick={() => handleModal('deleteModal')}
-        >
-          <FontAwesomeIcon icon={Trash} size="1x" />
-        </Button>
-      </div>
+        </div>
+      }
       <span className="overlay"
         onClick={showAction}
       >

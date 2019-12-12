@@ -126,9 +126,12 @@ class Collection extends Component {
                     <h1 className="title">My Collections</h1>
                   </LevelLeft>
                   <LevelRight>
-                    <Button onClick={() => this.history.push('/search')}>
-                      + Find Images
-                    </Button>
+                    {
+                      (this.state.user._id === this.state.collection.user._id) &&
+                      <Button onClick={() => this.history.push('/search')}>
+                        + Find Images
+                      </Button>
+                    }
                   </LevelRight>
                 </Level>
                 <hr />
@@ -158,6 +161,7 @@ class Collection extends Component {
                           key={index}
                           title={image.title}
                           subtitle={image.subtitle}
+                          user={this.state.collection.user}
                           src={image.urls.regular}
                           alt={image.alt_description}
                           image={image}

@@ -23,8 +23,8 @@ const useFetchCollections = (loading, setLoading) => {
 
     setMounted(true)
     const aysncData = (() => {
-      api.getCollectionModel().index({ _id: user._id })
-        .then(({ collections }) => setCollections(collections))
+      api.getCollectionModel().userCollections({ _id: user._id })
+        .then(({ userCollections }) => setCollections(userCollections))
         .then(() => setLoading(false))
         .catch((err) => console.log(err))
         .then(() => setLoading(false))

@@ -11,7 +11,7 @@ import { AuthContext } from '../../services/auth'
 import { withRouter } from 'react-router-dom'
 import Masonry from 'react-masonry-css'
 
-class Dashboard extends Component {
+class Collections extends Component {
 
   constructor(props) {
     super(props)
@@ -37,7 +37,7 @@ class Dashboard extends Component {
     this._mounted = true
     const user = this.context.getCurrentUser()
     this._mounted && this.setState({ user })
-    await this.listCollections(user)
+    await this.listCollections()
     this._mounted && this.setState({ loading: false })
   }
 
@@ -45,10 +45,10 @@ class Dashboard extends Component {
     this._mounted = false
   }
 
-  listCollections = async ({ _id }) => {
-    let { userCollections } = await this.props.Collection.userCollections({ _id })
+  listCollections = async () => {
+    let { collections } = await this.props.Collection.index()
       .catch((err) => console.log(err));
-    this._mounted && this.setState({ collections: userCollections })
+    this._mounted && this.setState({ collections: collections })
   }
 
   showCollection = ({ _id }) => {
@@ -187,6 +187,6 @@ class Dashboard extends Component {
 
 }
 
-Dashboard.contextType = AuthContext
+Collections.contextType = AuthContext
 
-export default withRouter(Dashboard)
+export default withRouter(Collections)

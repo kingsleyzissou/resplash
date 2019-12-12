@@ -6,6 +6,9 @@ export default {
       collection(_id: $_id) {
         _id
         name
+        user {
+          _id
+        }
         images {
           _id
           description
@@ -52,6 +55,29 @@ export default {
         name
         subtitle
         description
+        user {
+          _id
+          username
+        }
+        images {
+          urls {
+            regular
+          }
+        }
+      }
+    }
+`,
+  GET_USER_COLLECTIONS: gql`
+    query userCollections {
+      userCollections {
+        _id
+        name
+        subtitle
+        description
+        user {
+          _id
+          username
+        }
         images {
           urls {
             regular
