@@ -19,10 +19,7 @@ The app is essentially a replica of Unsplash.com, using  the unsplash api. Users
 
 Clone or download the repo.
 
-Before you can begin, you will need to setup firebase.
-To do so, navigate to [Google Firebase](https://firebase.google.com/) and click on get started. Add a new project. You will need to add authentication. Set the sign up method to email and password as well as Google sign-in. Next add a firestore database in test mode. Register the app and copy the api credentials into a .env file.
-
-You will also need to create an unsplash developer account and a project. Once this has been done, add the credentials to the .env file.
+Before you can begin, you will need to create an unsplash developer account and a project. Once this has been done, add the credentials to the .env file.
 
 Lastly, from the project directory, run
 
@@ -68,6 +65,7 @@ List of all the routes in the app
 
 - /(public)- Displayes the home page.
 - /dashboard (protected) - Overview of all user's collections.
+- /collections (protected) - Overview of all collections.
 - /collection/:id (private) - detail view of all the images in a collection
 - /profile (private) - user profile
 - /login (public) - login page
@@ -90,19 +88,13 @@ Screenshot of all the storybook components.
 
 ## Backend.
 
-The backend was made up entirely using Firebase.Firestore was used to create the database for the collections and the images within the collection. I created an API class with Collection and Image models to handle the firestore requests and pass the data to the required components.
+The backend for this repo can be found at the following link.
 
-![][collection]
-
->>> Screenshot of the collection model
+[Resplash server backend](https://github.com/kingsleyzissou/resplash-server)
 
 ## Authentication.
 
-The app makes use of firebase authentication. The app allows for username/password sign in and sign up or using Google sign up. Cookie persistence is used to handle the session.
-
-The following article was used for reference purposes:
-
-[Simple Email and Google Auth with React and Firebase](https://medium.com/better-programming/dead-simple-auth-with-react-and-firebase-592e40ff43c5)
+JWT was used to provide authentication between the client and the server. Initial authentication was done with standard http requests to the server. Apollo Server context was used for the middleware to protect GraphQL endpoints.
 
 ## Independent learning.
 
@@ -113,6 +105,8 @@ In addition to the hooks, the app makes use of React Context and Consumer and Pr
 Managing the project and all the components was part of the learning experience and creating relevant folders to house all the components, grew very necessary, very quickly.
 
 A private/protected route was one of the easier components to recreate.
+
+Lastly, GraphQL was a core feature of the second part of this assignemnt. This was not within the scope of the assignment and all the learning with regards to GraphQL was self-directed
 
 [diagram]: ./img/diagram.png
 [main]: ./img/main.png
