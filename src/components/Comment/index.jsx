@@ -47,7 +47,7 @@ const Comment = (props) => {
     const _id = props.comment._id;
     const type = 'comment';
     await Comment.add({ typeId: _id, type, comment })
-      .catch(err => this.showAlert(false, err))
+      .catch(err => console.log(err))
     setIsActive(false);
     getComments()
   }

@@ -35,8 +35,6 @@ export default (props) => {
     showAction()
   }
 
-  console.log(props.user)
-
   return (
     <div className="collection">
       <span className="caption">

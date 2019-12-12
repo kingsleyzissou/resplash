@@ -23,7 +23,6 @@ const LoginForm = ({ auth, history }) => {
     await auth.login(input)
       .then(() => history.push('/dashboard'))
       .catch(({ message }) => {
-        console.log(message)
         setErrs({ message })
         setLoading(false)
       })
